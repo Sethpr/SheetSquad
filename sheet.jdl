@@ -1,0 +1,173 @@
+entity Character {
+	name String
+    talentName String
+    loyalty String
+    passion String
+    inventory String
+    pointTotal Integer required
+    spentPoints Integer required
+}
+
+entity Archetype{
+	name String
+    cost Integer required
+    notes String
+}
+
+entity Stat{
+	type StatType required
+}
+
+entity Skill{
+	type SkillType required
+    under StatType required
+}
+
+entity Pool{
+	normal Integer
+    hard Integer
+    wiggle Integer
+    expert Integer
+}
+
+entity PowerCategory {
+	name String required
+    priority Integer
+    cost Integer required
+}
+
+entity Power {
+	name String required
+    cost Integer required
+    notes String
+}
+
+entity Quality{
+	type QualityType required
+    capacity1 Capacity required
+    capacity2 Capacity
+    capacity3 Capacity
+    cost Integer required
+}
+
+entity Extra{
+    multiplier Integer required
+    notes String
+    capacity Capacity
+}
+
+entity BaseExtra {
+	name String
+    value Integer
+}
+
+entity Refrence {
+    title String
+    info String
+}
+
+enum QualityType {
+	ATTACK, 
+    USEFUL, 
+    DEFENSE
+}
+
+enum Capacity{
+	SPEED,
+    RANGE,
+    MASS,
+	TOUCH,
+    SELF
+}
+
+enum StatType {
+	BODY,
+    COORDINATION,
+	SENSE,
+    MIND,
+	CHARM,
+    COMMAND
+}
+
+enum SkillType {
+	ATHLETICS,
+    BLOCK,
+    BRAWILING,
+    ENDURANCE,
+    WEAPON,
+    DODGE,
+    DRIVE,
+    LOCKPICKING,
+    STEALTH,
+    EMPATHY,
+    PERCEPTION,
+    SCRUTINY,
+    FIRST_AID,
+    KNOWLEGE,
+    LANGUAGE,
+    MEDICINE,
+    NAVIGATION,
+    RESEARCH,
+    SECURITY_SYSTEMS,
+    STREETWISE,
+    SURVIVAL,
+    TATICS,
+    LIE,
+    PERFORM,
+    PERSUASION,
+    INTERROGATION,
+    INTIMIDATION,
+    LEADERSHIP,
+    STABILITY
+}
+
+
+relationship ManyToOne {
+	PowerCategory{owner} to Character
+}
+
+relationship ManyToOne {
+	Character{owner} to User
+}
+
+relationship ManyToOne {
+	Power{owner} to PowerCategory
+}
+
+relationship ManyToOne {
+	Quality{owner} to Power
+}
+
+relationship OneToOne {
+	Character{archetype} to Archetype
+}
+
+relationship ManyToMany {
+	Quality{extra} to Extra{power}
+    Stat{extra} to Extra{stat}
+    Skill{extra} to Extra{skill}
+}
+
+relationship ManyToMany {
+	Stat{owner} to Character{stat}
+    Skill{owner} to Character{skill}
+}
+
+relationship ManyToOne {
+	Stat{pool} to Pool
+    Skill{pool} to Pool
+    Power{pool} to Pool
+}
+
+relationship ManyToOne {
+	Extra{base} to BaseExtra
+}
+
+relationship OneToOne {
+	BaseExtra{refrence} to Refrence
+}
+
+relationship ManyToOne {
+	Stat{refrence} to Refrence
+    Skill{refrence} to Refrence
+}

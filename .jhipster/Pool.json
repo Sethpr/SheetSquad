@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20230428125121",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "pool",
+  "fields": [
+    {
+      "fieldName": "normal",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "hard",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "wiggle",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "expert",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Pool",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

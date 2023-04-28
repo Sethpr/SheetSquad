@@ -1,0 +1,56 @@
+{
+  "applications": "*",
+  "changelogDate": "20230428125124",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "quality",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "QualityType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ATTACK,USEFUL,DEFENSE"
+    },
+    {
+      "fieldName": "capacity1",
+      "fieldType": "Capacity",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "SPEED,RANGE,MASS,TOUCH,SELF"
+    },
+    {
+      "fieldName": "capacity2",
+      "fieldType": "Capacity",
+      "fieldValues": "SPEED,RANGE,MASS,TOUCH,SELF"
+    },
+    {
+      "fieldName": "capacity3",
+      "fieldType": "Capacity",
+      "fieldValues": "SPEED,RANGE,MASS,TOUCH,SELF"
+    },
+    {
+      "fieldName": "cost",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Quality",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "power",
+      "relationshipName": "owner",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "extra",
+      "otherEntityRelationshipName": "power",
+      "ownerSide": true,
+      "relationshipName": "extra",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

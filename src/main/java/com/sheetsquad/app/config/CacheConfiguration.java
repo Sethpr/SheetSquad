@@ -48,6 +48,27 @@ public class CacheConfiguration {
             createCache(cm, com.sheetsquad.app.domain.User.class.getName());
             createCache(cm, com.sheetsquad.app.domain.Authority.class.getName());
             createCache(cm, com.sheetsquad.app.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.sheetsquad.app.domain.Character.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.Character.class.getName() + ".stats");
+            createCache(cm, com.sheetsquad.app.domain.Character.class.getName() + ".skills");
+            createCache(cm, com.sheetsquad.app.domain.Archetype.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.Stat.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.Stat.class.getName() + ".extras");
+            createCache(cm, com.sheetsquad.app.domain.Stat.class.getName() + ".owners");
+            createCache(cm, com.sheetsquad.app.domain.Skill.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.Skill.class.getName() + ".extras");
+            createCache(cm, com.sheetsquad.app.domain.Skill.class.getName() + ".owners");
+            createCache(cm, com.sheetsquad.app.domain.Pool.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.PowerCategory.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.Power.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.Quality.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.Quality.class.getName() + ".extras");
+            createCache(cm, com.sheetsquad.app.domain.Extra.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.Extra.class.getName() + ".powers");
+            createCache(cm, com.sheetsquad.app.domain.Extra.class.getName() + ".stats");
+            createCache(cm, com.sheetsquad.app.domain.Extra.class.getName() + ".skills");
+            createCache(cm, com.sheetsquad.app.domain.BaseExtra.class.getName());
+            createCache(cm, com.sheetsquad.app.domain.Refrence.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

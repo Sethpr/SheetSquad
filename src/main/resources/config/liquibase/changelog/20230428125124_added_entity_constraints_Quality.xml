@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Quality.
+    -->
+    <changeSet id="20230428125124-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="quality"
+                                 constraintName="fk_quality__owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="power"/>
+
+        <addForeignKeyConstraint baseColumnNames="quality_id"
+                                 baseTableName="rel_quality__extra"
+                                 constraintName="fk_rel_quality__extra__quality_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="quality"/>
+
+        <addForeignKeyConstraint baseColumnNames="extra_id"
+                                 baseTableName="rel_quality__extra"
+                                 constraintName="fk_rel_quality__extra__extra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="extra"/>
+    </changeSet>
+</databaseChangeLog>

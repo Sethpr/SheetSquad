@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20230428125122",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "power_category",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cost",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PowerCategory",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "character",
+      "relationshipName": "owner",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

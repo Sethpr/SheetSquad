@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20230428125125",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "extra",
+  "fields": [
+    {
+      "fieldName": "multiplier",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "capacity",
+      "fieldType": "Capacity",
+      "fieldValues": "SPEED,RANGE,MASS,TOUCH,SELF"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Extra",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "baseExtra",
+      "relationshipName": "base",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "quality",
+      "otherEntityRelationshipName": "extra",
+      "ownerSide": false,
+      "relationshipName": "power",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "stat",
+      "otherEntityRelationshipName": "extra",
+      "ownerSide": false,
+      "relationshipName": "stat",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "skill",
+      "otherEntityRelationshipName": "extra",
+      "ownerSide": false,
+      "relationshipName": "skill",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

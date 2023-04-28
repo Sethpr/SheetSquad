@@ -1,0 +1,72 @@
+{
+  "applications": "*",
+  "changelogDate": "20230428125117",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "character",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "talentName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "loyalty",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "passion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "inventory",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pointTotal",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "spentPoints",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Character",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "archetype",
+      "ownerSide": true,
+      "relationshipName": "archetype",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "user",
+      "relationshipName": "owner",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "stat",
+      "otherEntityRelationshipName": "owner",
+      "ownerSide": false,
+      "relationshipName": "stat",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "skill",
+      "otherEntityRelationshipName": "owner",
+      "ownerSide": false,
+      "relationshipName": "skill",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20230428125126",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "base_extra",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "BaseExtra",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "refrence",
+      "ownerSide": true,
+      "relationshipName": "refrence",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

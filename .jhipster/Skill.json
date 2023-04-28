@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20230428125120",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "skill",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "SkillType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ATHLETICS,BLOCK,BRAWILING,ENDURANCE,WEAPON,DODGE,DRIVE,LOCKPICKING,STEALTH,EMPATHY,PERCEPTION,SCRUTINY,FIRST_AID,KNOWLEGE,LANGUAGE,MEDICINE,NAVIGATION,RESEARCH,SECURITY_SYSTEMS,STREETWISE,SURVIVAL,TATICS,LIE,PERFORM,PERSUASION,INTERROGATION,INTIMIDATION,LEADERSHIP,STABILITY"
+    },
+    {
+      "fieldName": "under",
+      "fieldType": "StatType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "BODY,COORDINATION,SENSE,MIND,CHARM,COMMAND"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Skill",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "pool",
+      "relationshipName": "pool",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "refrence",
+      "relationshipName": "refrence",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "extra",
+      "otherEntityRelationshipName": "skill",
+      "ownerSide": true,
+      "relationshipName": "extra",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "character",
+      "otherEntityRelationshipName": "skill",
+      "ownerSide": true,
+      "relationshipName": "owner",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

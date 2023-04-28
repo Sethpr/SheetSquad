@@ -1,0 +1,24 @@
+{
+  "applications": "*",
+  "changelogDate": "20230428125127",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "refrence",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "info",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Refrence",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

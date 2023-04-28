@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Skill.
+    -->
+    <changeSet id="20230428125120-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="pool_id"
+                                 baseTableName="skill"
+                                 constraintName="fk_skill__pool_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pool"/>
+
+        <addForeignKeyConstraint baseColumnNames="refrence_id"
+                                 baseTableName="skill"
+                                 constraintName="fk_skill__refrence_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="refrence"/>
+
+        <addForeignKeyConstraint baseColumnNames="skill_id"
+                                 baseTableName="rel_skill__extra"
+                                 constraintName="fk_rel_skill__extra__skill_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="skill"/>
+
+        <addForeignKeyConstraint baseColumnNames="extra_id"
+                                 baseTableName="rel_skill__extra"
+                                 constraintName="fk_rel_skill__extra__extra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="extra"/>
+
+        <addForeignKeyConstraint baseColumnNames="skill_id"
+                                 baseTableName="rel_skill__owner"
+                                 constraintName="fk_rel_skill__owner__skill_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="skill"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="rel_skill__owner"
+                                 constraintName="fk_rel_skill__owner__owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="character"/>
+    </changeSet>
+</databaseChangeLog>

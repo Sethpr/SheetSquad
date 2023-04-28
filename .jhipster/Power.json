@@ -1,0 +1,41 @@
+{
+  "applications": "*",
+  "changelogDate": "20230428125123",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "power",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "cost",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Power",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "powerCategory",
+      "relationshipName": "owner",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "pool",
+      "relationshipName": "pool",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}
