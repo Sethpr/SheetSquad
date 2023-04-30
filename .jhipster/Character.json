@@ -49,6 +49,7 @@
       "relationshipType": "one-to-one"
     },
     {
+      "otherEntityField": "login",
       "otherEntityName": "user",
       "relationshipName": "owner",
       "relationshipType": "many-to-one"

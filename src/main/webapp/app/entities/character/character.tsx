@@ -75,7 +75,7 @@ export const Character = () => {
                   <td>{character.pointTotal}</td>
                   <td>{character.spentPoints}</td>
                   <td>{character.archetype ? <Link to={`/archetype/${character.archetype.id}`}>{character.archetype.id}</Link> : ''}</td>
-                  <td>{character.owner ? character.owner.id : ''}</td>
+                  <td>{character.owner ? character.owner.login : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/character/${character.id}`} color="info" size="sm" data-cy="entityDetailsButton">

@@ -127,7 +127,7 @@ relationship ManyToOne {
 }
 
 relationship ManyToOne {
-	Character{owner} to User
+	Character{owner(login)} to User
 }
 
 relationship ManyToOne {
