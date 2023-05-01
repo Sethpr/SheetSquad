@@ -10,12 +10,12 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IPool } from 'app/shared/model/pool.model';
 import { getEntities as getPools } from 'app/entities/pool/pool.reducer';
-import { IRefrence } from 'app/shared/model/refrence.model';
-import { getEntities as getRefrences } from 'app/entities/refrence/refrence.reducer';
 import { IExtra } from 'app/shared/model/extra.model';
 import { getEntities as getExtras } from 'app/entities/extra/extra.reducer';
 import { ICharacter } from 'app/shared/model/character.model';
 import { getEntities as getCharacters } from 'app/entities/character/character.reducer';
+import { IRefrence } from 'app/shared/model/refrence.model';
+import { getEntities as getRefrences } from 'app/entities/refrence/refrence.reducer';
 import { ISkill } from 'app/shared/model/skill.model';
 import { SkillType } from 'app/shared/model/enumerations/skill-type.model';
 import { StatType } from 'app/shared/model/enumerations/stat-type.model';
@@ -30,9 +30,9 @@ export const SkillUpdate = () => {
   const isNew = id === undefined;
 
   const pools = useAppSelector(state => state.pool.entities);
-  const refrences = useAppSelector(state => state.refrence.entities);
   const extras = useAppSelector(state => state.extra.entities);
   const characters = useAppSelector(state => state.character.entities);
+  const refrences = useAppSelector(state => state.refrence.entities);
   const skillEntity = useAppSelector(state => state.skill.entity);
   const loading = useAppSelector(state => state.skill.loading);
   const updating = useAppSelector(state => state.skill.updating);
@@ -52,9 +52,9 @@ export const SkillUpdate = () => {
     }
 
     dispatch(getPools({}));
-    dispatch(getRefrences({}));
     dispatch(getExtras({}));
     dispatch(getCharacters({}));
+    dispatch(getRefrences({}));
   }, []);
 
   useEffect(() => {
@@ -67,9 +67,9 @@ export const SkillUpdate = () => {
     const entity = {
       ...skillEntity,
       ...values,
-      extras: mapIdList(values.extras),
-      owners: mapIdList(values.owners),
       pool: pools.find(it => it.id.toString() === values.pool.toString()),
+      extra: extras.find(it => it.id.toString() === values.extra.toString()),
+      owner: characters.find(it => it.id.toString() === values.owner.toString()),
       refrence: refrences.find(it => it.id.toString() === values.refrence.toString()),
     };
 
@@ -88,9 +88,9 @@ export const SkillUpdate = () => {
           under: 'BODY',
           ...skillEntity,
           pool: skillEntity?.pool?.id,
+          extra: skillEntity?.extra?.id,
+          owner: skillEntity?.owner?.id,
           refrence: skillEntity?.refrence?.id,
-          extras: skillEntity?.extras?.map(e => e.id.toString()),
-          owners: skillEntity?.owners?.map(e => e.id.toString()),
         };
 
   return (
@@ -133,17 +133,7 @@ export const SkillUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField id="skill-refrence" name="refrence" data-cy="refrence" label="Refrence" type="select">
-                <option value="" key="0" />
-                {refrences
-                  ? refrences.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField label="Extra" id="skill-extra" data-cy="extra" type="select" multiple name="extras">
+              <ValidatedField id="skill-extra" name="extra" data-cy="extra" label="Extra" type="select">
                 <option value="" key="0" />
                 {extras
                   ? extras.map(otherEntity => (
@@ -153,10 +143,20 @@ export const SkillUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField label="Owner" id="skill-owner" data-cy="owner" type="select" multiple name="owners">
+              <ValidatedField id="skill-owner" name="owner" data-cy="owner" label="Owner" type="select">
                 <option value="" key="0" />
                 {characters
                   ? characters.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.name}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField id="skill-refrence" name="refrence" data-cy="refrence" label="Refrence" type="select">
+                <option value="" key="0" />
+                {refrences
+                  ? refrences.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

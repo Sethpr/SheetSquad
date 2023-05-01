@@ -32,22 +32,11 @@
             <column name="owner_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="extra_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-    </changeSet>
-
-    <changeSet id="20230428125124-1-relations" author="jhipster">
-
-        <createTable tableName="rel_quality__extra">
-            <column name="extra_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="quality_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="quality_id, extra_id" tableName="rel_quality__extra"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

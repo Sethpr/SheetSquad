@@ -12,10 +12,6 @@ import { IArchetype } from 'app/shared/model/archetype.model';
 import { getEntities as getArchetypes } from 'app/entities/archetype/archetype.reducer';
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
-import { IStat } from 'app/shared/model/stat.model';
-import { getEntities as getStats } from 'app/entities/stat/stat.reducer';
-import { ISkill } from 'app/shared/model/skill.model';
-import { getEntities as getSkills } from 'app/entities/skill/skill.reducer';
 import { ICharacter } from 'app/shared/model/character.model';
 import { getEntity, updateEntity, createEntity, reset } from './character.reducer';
 
@@ -29,8 +25,6 @@ export const CharacterUpdate = () => {
 
   const archetypes = useAppSelector(state => state.archetype.entities);
   const users = useAppSelector(state => state.userManagement.users);
-  const stats = useAppSelector(state => state.stat.entities);
-  const skills = useAppSelector(state => state.skill.entities);
   const characterEntity = useAppSelector(state => state.character.entity);
   const loading = useAppSelector(state => state.character.loading);
   const updating = useAppSelector(state => state.character.updating);
@@ -49,8 +43,6 @@ export const CharacterUpdate = () => {
 
     dispatch(getArchetypes({}));
     dispatch(getUsers({}));
-    dispatch(getStats({}));
-    dispatch(getSkills({}));
   }, []);
 
   useEffect(() => {
@@ -99,7 +91,16 @@ export const CharacterUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="character-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Name" id="character-name" name="name" data-cy="name" type="text" />
+              <ValidatedField
+                label="Name"
+                id="character-name"
+                name="name"
+                data-cy="name"
+                type="text"
+                validate={{
+                  required: { value: true, message: 'This field is required.' },
+                }}
+              />
               <ValidatedField label="Talent Name" id="character-talentName" name="talentName" data-cy="talentName" type="text" />
               <ValidatedField label="Loyalty" id="character-loyalty" name="loyalty" data-cy="loyalty" type="text" />
               <ValidatedField label="Passion" id="character-passion" name="passion" data-cy="passion" type="text" />

@@ -49,9 +49,9 @@ export const Stat = () => {
                 <th>ID</th>
                 <th>Type</th>
                 <th>Pool</th>
-                <th>Refrence</th>
                 <th>Extra</th>
                 <th>Owner</th>
+                <th>Refrence</th>
                 <th />
               </tr>
             </thead>
@@ -65,27 +65,9 @@ export const Stat = () => {
                   </td>
                   <td>{stat.type}</td>
                   <td>{stat.pool ? <Link to={`/pool/${stat.pool.id}`}>{stat.pool.id}</Link> : ''}</td>
+                  <td>{stat.extra ? <Link to={`/extra/${stat.extra.id}`}>{stat.extra.id}</Link> : ''}</td>
+                  <td>{stat.owner ? <Link to={`/character/${stat.owner.id}`}>{stat.owner.name}</Link> : ''}</td>
                   <td>{stat.refrence ? <Link to={`/refrence/${stat.refrence.id}`}>{stat.refrence.id}</Link> : ''}</td>
-                  <td>
-                    {stat.extras
-                      ? stat.extras.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/extra/${val.id}`}>{val.id}</Link>
-                            {j === stat.extras.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
-                  <td>
-                    {stat.owners
-                      ? stat.owners.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/character/${val.id}`}>{val.id}</Link>
-                            {j === stat.owners.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/stat/${stat.id}`} color="info" size="sm" data-cy="entityDetailsButton">

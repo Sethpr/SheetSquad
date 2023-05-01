@@ -146,12 +146,17 @@ public class PowerResource {
     /**
      * {@code GET  /powers} : get all the powers.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of powers in body.
      */
     @GetMapping("/powers")
-    public List<Power> getAllPowers() {
+    public List<Power> getAllPowers(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Powers");
-        return powerRepository.findAll();
+        if (eagerload) {
+            return powerRepository.findAllWithEagerRelationships();
+        } else {
+            return powerRepository.findAll();
+        }
     }
 
     /**
@@ -163,7 +168,7 @@ public class PowerResource {
     @GetMapping("/powers/{id}")
     public ResponseEntity<Power> getPower(@PathVariable Long id) {
         log.debug("REST request to get Power : {}", id);
-        Optional<Power> power = powerRepository.findById(id);
+        Optional<Power> power = powerRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(power);
     }
 

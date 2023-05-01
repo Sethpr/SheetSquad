@@ -27,6 +27,7 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "name",
       "otherEntityName": "character",
       "relationshipName": "owner",
       "relationshipType": "many-to-one"

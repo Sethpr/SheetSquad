@@ -7,7 +7,8 @@
   "fields": [
     {
       "fieldName": "name",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "talentName",
@@ -53,20 +54,6 @@
       "otherEntityName": "user",
       "relationshipName": "owner",
       "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "stat",
-      "otherEntityRelationshipName": "owner",
-      "ownerSide": false,
-      "relationshipName": "stat",
-      "relationshipType": "many-to-many"
-    },
-    {
-      "otherEntityName": "skill",
-      "otherEntityRelationshipName": "owner",
-      "ownerSide": false,
-      "relationshipName": "skill",
-      "relationshipType": "many-to-many"
     }
   ],
   "service": "no"

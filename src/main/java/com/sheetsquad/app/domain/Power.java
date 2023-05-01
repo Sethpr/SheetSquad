@@ -35,12 +35,13 @@ public class Power implements Serializable {
     @Column(name = "notes")
     private String notes;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Pool pool;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "owner" }, allowSetters = true)
     private PowerCategory owner;
-
-    @ManyToOne
-    private Pool pool;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -96,19 +97,6 @@ public class Power implements Serializable {
         this.notes = notes;
     }
 
-    public PowerCategory getOwner() {
-        return this.owner;
-    }
-
-    public void setOwner(PowerCategory powerCategory) {
-        this.owner = powerCategory;
-    }
-
-    public Power owner(PowerCategory powerCategory) {
-        this.setOwner(powerCategory);
-        return this;
-    }
-
     public Pool getPool() {
         return this.pool;
     }
@@ -119,6 +107,19 @@ public class Power implements Serializable {
 
     public Power pool(Pool pool) {
         this.setPool(pool);
+        return this;
+    }
+
+    public PowerCategory getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(PowerCategory powerCategory) {
+        this.owner = powerCategory;
+    }
+
+    public Power owner(PowerCategory powerCategory) {
+        this.setOwner(powerCategory);
         return this;
     }
 

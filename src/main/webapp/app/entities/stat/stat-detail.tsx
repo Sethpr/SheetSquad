@@ -34,30 +34,12 @@ export const StatDetail = () => {
           <dd>{statEntity.type}</dd>
           <dt>Pool</dt>
           <dd>{statEntity.pool ? statEntity.pool.id : ''}</dd>
+          <dt>Extra</dt>
+          <dd>{statEntity.extra ? statEntity.extra.id : ''}</dd>
+          <dt>Owner</dt>
+          <dd>{statEntity.owner ? statEntity.owner.name : ''}</dd>
           <dt>Refrence</dt>
           <dd>{statEntity.refrence ? statEntity.refrence.id : ''}</dd>
-          <dt>Extra</dt>
-          <dd>
-            {statEntity.extras
-              ? statEntity.extras.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {statEntity.extras && i === statEntity.extras.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
-          <dt>Owner</dt>
-          <dd>
-            {statEntity.owners
-              ? statEntity.owners.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {statEntity.owners && i === statEntity.owners.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
         </dl>
         <Button tag={Link} to="/stat" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

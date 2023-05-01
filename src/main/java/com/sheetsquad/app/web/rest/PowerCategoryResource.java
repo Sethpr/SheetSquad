@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -148,12 +149,34 @@ public class PowerCategoryResource {
     /**
      * {@code GET  /power-categories} : get all the powerCategories.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of powerCategories in body.
      */
     @GetMapping("/power-categories")
-    public List<PowerCategory> getAllPowerCategories() {
+    public List<PowerCategory> getAllPowerCategories(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all PowerCategories");
-        return powerCategoryRepository.findAll();
+        if (eagerload) {
+            return powerCategoryRepository.findAllWithEagerRelationships();
+        } else {
+            return powerCategoryRepository.findAll();
+        }
+    }
+
+    @GetMapping("/power-categories/owner/{id}")
+    public List<PowerCategory> getPowerCategoriesByOwner(@PathVariable Long id) {
+        log.debug("REST request to get all PowerCategories with a specific owner");
+        List<PowerCategory> categoriesList = powerCategoryRepository
+            .findAll()
+            .stream()
+            .filter(p -> {
+                if (p.getOwner() == null) {
+                    return false;
+                }
+                return p.getOwner().getId().equals(id);
+            })
+            .collect(Collectors.toList());
+        System.out.println(categoriesList.size());
+        return categoriesList;
     }
 
     /**
@@ -165,7 +188,7 @@ public class PowerCategoryResource {
     @GetMapping("/power-categories/{id}")
     public ResponseEntity<PowerCategory> getPowerCategory(@PathVariable Long id) {
         log.debug("REST request to get PowerCategory : {}", id);
-        Optional<PowerCategory> powerCategory = powerCategoryRepository.findById(id);
+        Optional<PowerCategory> powerCategory = powerCategoryRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(powerCategory);
     }
 

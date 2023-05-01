@@ -30,27 +30,6 @@
       "otherEntityName": "baseExtra",
       "relationshipName": "base",
       "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "quality",
-      "otherEntityRelationshipName": "extra",
-      "ownerSide": false,
-      "relationshipName": "power",
-      "relationshipType": "many-to-many"
-    },
-    {
-      "otherEntityName": "stat",
-      "otherEntityRelationshipName": "extra",
-      "ownerSide": false,
-      "relationshipName": "stat",
-      "relationshipType": "many-to-many"
-    },
-    {
-      "otherEntityName": "skill",
-      "otherEntityRelationshipName": "extra",
-      "ownerSide": false,
-      "relationshipName": "skill",
-      "relationshipType": "many-to-many"
     }
   ],
   "service": "no"

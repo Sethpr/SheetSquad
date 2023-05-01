@@ -11,21 +11,30 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Spring Data JPA repository for the Skill entity.
- *
- * When extending this class, extend SkillRepositoryWithBagRelationships too.
- * For more information refer to https://github.com/jhipster/generator-jhipster/issues/17990.
  */
 @Repository
-public interface SkillRepository extends SkillRepositoryWithBagRelationships, JpaRepository<Skill, Long> {
+public interface SkillRepository extends JpaRepository<Skill, Long> {
     default Optional<Skill> findOneWithEagerRelationships(Long id) {
-        return this.fetchBagRelationships(this.findById(id));
+        return this.findOneWithToOneRelationships(id);
     }
 
     default List<Skill> findAllWithEagerRelationships() {
-        return this.fetchBagRelationships(this.findAll());
+        return this.findAllWithToOneRelationships();
     }
 
     default Page<Skill> findAllWithEagerRelationships(Pageable pageable) {
-        return this.fetchBagRelationships(this.findAll(pageable));
+        return this.findAllWithToOneRelationships(pageable);
     }
+
+    @Query(
+        value = "select distinct skill from Skill skill left join fetch skill.owner",
+        countQuery = "select count(distinct skill) from Skill skill"
+    )
+    Page<Skill> findAllWithToOneRelationships(Pageable pageable);
+
+    @Query("select distinct skill from Skill skill left join fetch skill.owner")
+    List<Skill> findAllWithToOneRelationships();
+
+    @Query("select skill from Skill skill left join fetch skill.owner where skill.id =:id")
+    Optional<Skill> findOneWithToOneRelationships(@Param("id") Long id);
 }

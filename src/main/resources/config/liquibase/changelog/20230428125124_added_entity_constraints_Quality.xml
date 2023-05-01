@@ -14,15 +14,9 @@
                                  referencedColumnNames="id"
                                  referencedTableName="power"/>
 
-        <addForeignKeyConstraint baseColumnNames="quality_id"
-                                 baseTableName="rel_quality__extra"
-                                 constraintName="fk_rel_quality__extra__quality_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="quality"/>
-
         <addForeignKeyConstraint baseColumnNames="extra_id"
-                                 baseTableName="rel_quality__extra"
-                                 constraintName="fk_rel_quality__extra__extra_id"
+                                 baseTableName="quality"
+                                 constraintName="fk_quality__extra_id"
                                  referencedColumnNames="id"
                                  referencedTableName="extra"/>
     </changeSet>

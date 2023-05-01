@@ -3,8 +3,6 @@ package com.sheetsquad.app.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sheetsquad.app.domain.enumeration.Capacity;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -41,21 +39,6 @@ public class Extra implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "refrence" }, allowSetters = true)
     private BaseExtra base;
-
-    @ManyToMany(mappedBy = "extras")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "owner", "extras" }, allowSetters = true)
-    private Set<Quality> powers = new HashSet<>();
-
-    @ManyToMany(mappedBy = "extras")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "pool", "refrence", "extras", "owners" }, allowSetters = true)
-    private Set<Stat> stats = new HashSet<>();
-
-    @ManyToMany(mappedBy = "extras")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "pool", "refrence", "extras", "owners" }, allowSetters = true)
-    private Set<Skill> skills = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -121,99 +104,6 @@ public class Extra implements Serializable {
 
     public Extra base(BaseExtra baseExtra) {
         this.setBase(baseExtra);
-        return this;
-    }
-
-    public Set<Quality> getPowers() {
-        return this.powers;
-    }
-
-    public void setPowers(Set<Quality> qualities) {
-        if (this.powers != null) {
-            this.powers.forEach(i -> i.removeExtra(this));
-        }
-        if (qualities != null) {
-            qualities.forEach(i -> i.addExtra(this));
-        }
-        this.powers = qualities;
-    }
-
-    public Extra powers(Set<Quality> qualities) {
-        this.setPowers(qualities);
-        return this;
-    }
-
-    public Extra addPower(Quality quality) {
-        this.powers.add(quality);
-        quality.getExtras().add(this);
-        return this;
-    }
-
-    public Extra removePower(Quality quality) {
-        this.powers.remove(quality);
-        quality.getExtras().remove(this);
-        return this;
-    }
-
-    public Set<Stat> getStats() {
-        return this.stats;
-    }
-
-    public void setStats(Set<Stat> stats) {
-        if (this.stats != null) {
-            this.stats.forEach(i -> i.removeExtra(this));
-        }
-        if (stats != null) {
-            stats.forEach(i -> i.addExtra(this));
-        }
-        this.stats = stats;
-    }
-
-    public Extra stats(Set<Stat> stats) {
-        this.setStats(stats);
-        return this;
-    }
-
-    public Extra addStat(Stat stat) {
-        this.stats.add(stat);
-        stat.getExtras().add(this);
-        return this;
-    }
-
-    public Extra removeStat(Stat stat) {
-        this.stats.remove(stat);
-        stat.getExtras().remove(this);
-        return this;
-    }
-
-    public Set<Skill> getSkills() {
-        return this.skills;
-    }
-
-    public void setSkills(Set<Skill> skills) {
-        if (this.skills != null) {
-            this.skills.forEach(i -> i.removeExtra(this));
-        }
-        if (skills != null) {
-            skills.forEach(i -> i.addExtra(this));
-        }
-        this.skills = skills;
-    }
-
-    public Extra skills(Set<Skill> skills) {
-        this.setSkills(skills);
-        return this;
-    }
-
-    public Extra addSkill(Skill skill) {
-        this.skills.add(skill);
-        skill.getExtras().add(this);
-        return this;
-    }
-
-    public Extra removeSkill(Skill skill) {
-        this.skills.remove(skill);
-        skill.getExtras().remove(this);
         return this;
     }
 

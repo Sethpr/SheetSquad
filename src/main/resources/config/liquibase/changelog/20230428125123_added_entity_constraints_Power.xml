@@ -8,16 +8,16 @@
     -->
     <changeSet id="20230428125123-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="owner_id"
-                                 baseTableName="power"
-                                 constraintName="fk_power__owner_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="power_category"/>
-
         <addForeignKeyConstraint baseColumnNames="pool_id"
                                  baseTableName="power"
                                  constraintName="fk_power__pool_id"
                                  referencedColumnNames="id"
                                  referencedTableName="pool"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="power"
+                                 constraintName="fk_power__owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="power_category"/>
     </changeSet>
 </databaseChangeLog>

@@ -169,7 +169,7 @@ public class CharacterResource {
         if (eagerload) {
             return characterRepository.findAllWithEagerRelationships();
         } else {
-            return characterRepository.findByOwnerIsCurrentUser();
+            return characterRepository.findAll();
         }
     }
 

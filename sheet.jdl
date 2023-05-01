@@ -1,5 +1,5 @@
 entity Character {
-	name String
+	name String required
     talentName String
     loyalty String
     passion String
@@ -123,7 +123,7 @@ enum SkillType {
 
 
 relationship ManyToOne {
-	PowerCategory{owner} to Character
+	PowerCategory{owner(name)} to Character
 }
 
 relationship ManyToOne {
@@ -131,29 +131,29 @@ relationship ManyToOne {
 }
 
 relationship ManyToOne {
-	Power{owner} to PowerCategory
+	Power{owner(name)} to PowerCategory
 }
 
 relationship ManyToOne {
-	Quality{owner} to Power
+	Quality{owner(name)} to Power
 }
 
 relationship OneToOne {
 	Character{archetype} to Archetype
 }
 
-relationship ManyToMany {
-	Quality{extra} to Extra{power}
-    Stat{extra} to Extra{stat}
-    Skill{extra} to Extra{skill}
-}
-
-relationship ManyToMany {
-	Stat{owner} to Character{stat}
-    Skill{owner} to Character{skill}
+relationship ManyToOne {
+	Quality{extra} to Extra
+    Stat{extra} to Extra
+    Skill{extra} to Extra
 }
 
 relationship ManyToOne {
+	Stat{owner(name)} to Character
+    Skill{owner(name)} to Character
+}
+
+relationship OneToOne {
 	Stat{pool} to Pool
     Skill{pool} to Pool
     Power{pool} to Pool

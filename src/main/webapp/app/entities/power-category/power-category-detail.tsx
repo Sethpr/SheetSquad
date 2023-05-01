@@ -41,7 +41,7 @@ export const PowerCategoryDetail = () => {
           </dt>
           <dd>{powerCategoryEntity.cost}</dd>
           <dt>Owner</dt>
-          <dd>{powerCategoryEntity.owner ? powerCategoryEntity.owner.id : ''}</dd>
+          <dd>{powerCategoryEntity.owner ? powerCategoryEntity.owner.name : ''}</dd>
         </dl>
         <Button tag={Link} to="/power-category" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

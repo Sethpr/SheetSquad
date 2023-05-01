@@ -50,8 +50,8 @@ export const Power = () => {
                 <th>Name</th>
                 <th>Cost</th>
                 <th>Notes</th>
-                <th>Owner</th>
                 <th>Pool</th>
+                <th>Owner</th>
                 <th />
               </tr>
             </thead>
@@ -66,8 +66,8 @@ export const Power = () => {
                   <td>{power.name}</td>
                   <td>{power.cost}</td>
                   <td>{power.notes}</td>
-                  <td>{power.owner ? <Link to={`/power-category/${power.owner.id}`}>{power.owner.id}</Link> : ''}</td>
                   <td>{power.pool ? <Link to={`/pool/${power.pool.id}`}>{power.pool.id}</Link> : ''}</td>
+                  <td>{power.owner ? <Link to={`/power-category/${power.owner.id}`}>{power.owner.name}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/power/${power.id}`} color="info" size="sm" data-cy="entityDetailsButton">

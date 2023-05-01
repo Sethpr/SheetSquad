@@ -50,9 +50,9 @@ export const Skill = () => {
                 <th>Type</th>
                 <th>Under</th>
                 <th>Pool</th>
-                <th>Refrence</th>
                 <th>Extra</th>
                 <th>Owner</th>
+                <th>Refrence</th>
                 <th />
               </tr>
             </thead>
@@ -67,27 +67,9 @@ export const Skill = () => {
                   <td>{skill.type}</td>
                   <td>{skill.under}</td>
                   <td>{skill.pool ? <Link to={`/pool/${skill.pool.id}`}>{skill.pool.id}</Link> : ''}</td>
+                  <td>{skill.extra ? <Link to={`/extra/${skill.extra.id}`}>{skill.extra.id}</Link> : ''}</td>
+                  <td>{skill.owner ? <Link to={`/character/${skill.owner.id}`}>{skill.owner.name}</Link> : ''}</td>
                   <td>{skill.refrence ? <Link to={`/refrence/${skill.refrence.id}`}>{skill.refrence.id}</Link> : ''}</td>
-                  <td>
-                    {skill.extras
-                      ? skill.extras.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/extra/${val.id}`}>{val.id}</Link>
-                            {j === skill.extras.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
-                  <td>
-                    {skill.owners
-                      ? skill.owners.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/character/${val.id}`}>{val.id}</Link>
-                            {j === skill.owners.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/skill/${skill.id}`} color="info" size="sm" data-cy="entityDetailsButton">

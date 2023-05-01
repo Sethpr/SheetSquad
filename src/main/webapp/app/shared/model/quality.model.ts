@@ -11,7 +11,7 @@ export interface IQuality {
   capacity3?: Capacity | null;
   cost?: number;
   owner?: IPower | null;
-  extras?: IExtra[] | null;
+  extra?: IExtra | null;
 }
 
 export const defaultValue: Readonly<IQuality> = {};

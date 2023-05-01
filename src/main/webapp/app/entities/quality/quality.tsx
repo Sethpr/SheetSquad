@@ -70,17 +70,8 @@ export const Quality = () => {
                   <td>{quality.capacity2}</td>
                   <td>{quality.capacity3}</td>
                   <td>{quality.cost}</td>
-                  <td>{quality.owner ? <Link to={`/power/${quality.owner.id}`}>{quality.owner.id}</Link> : ''}</td>
-                  <td>
-                    {quality.extras
-                      ? quality.extras.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/extra/${val.id}`}>{val.id}</Link>
-                            {j === quality.extras.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
+                  <td>{quality.owner ? <Link to={`/power/${quality.owner.id}`}>{quality.owner.name}</Link> : ''}</td>
+                  <td>{quality.extra ? <Link to={`/extra/${quality.extra.id}`}>{quality.extra.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/quality/${quality.id}`} color="info" size="sm" data-cy="entityDetailsButton">

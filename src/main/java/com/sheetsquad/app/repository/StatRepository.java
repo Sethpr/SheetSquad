@@ -11,21 +11,30 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Spring Data JPA repository for the Stat entity.
- *
- * When extending this class, extend StatRepositoryWithBagRelationships too.
- * For more information refer to https://github.com/jhipster/generator-jhipster/issues/17990.
  */
 @Repository
-public interface StatRepository extends StatRepositoryWithBagRelationships, JpaRepository<Stat, Long> {
+public interface StatRepository extends JpaRepository<Stat, Long> {
     default Optional<Stat> findOneWithEagerRelationships(Long id) {
-        return this.fetchBagRelationships(this.findById(id));
+        return this.findOneWithToOneRelationships(id);
     }
 
     default List<Stat> findAllWithEagerRelationships() {
-        return this.fetchBagRelationships(this.findAll());
+        return this.findAllWithToOneRelationships();
     }
 
     default Page<Stat> findAllWithEagerRelationships(Pageable pageable) {
-        return this.fetchBagRelationships(this.findAll(pageable));
+        return this.findAllWithToOneRelationships(pageable);
     }
+
+    @Query(
+        value = "select distinct stat from Stat stat left join fetch stat.owner",
+        countQuery = "select count(distinct stat) from Stat stat"
+    )
+    Page<Stat> findAllWithToOneRelationships(Pageable pageable);
+
+    @Query("select distinct stat from Stat stat left join fetch stat.owner")
+    List<Stat> findAllWithToOneRelationships();
+
+    @Query("select stat from Stat stat left join fetch stat.owner where stat.id =:id")
+    Optional<Stat> findOneWithToOneRelationships(@Param("id") Long id);
 }

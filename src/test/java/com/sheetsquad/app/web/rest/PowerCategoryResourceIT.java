@@ -2,20 +2,28 @@ package com.sheetsquad.app.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.sheetsquad.app.IntegrationTest;
 import com.sheetsquad.app.domain.PowerCategory;
 import com.sheetsquad.app.repository.PowerCategoryRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link PowerCategoryResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class PowerCategoryResourceIT {
@@ -46,6 +55,9 @@ class PowerCategoryResourceIT {
 
     @Autowired
     private PowerCategoryRepository powerCategoryRepository;
+
+    @Mock
+    private PowerCategoryRepository powerCategoryRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -167,6 +179,23 @@ class PowerCategoryResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].priority").value(hasItem(DEFAULT_PRIORITY)))
             .andExpect(jsonPath("$.[*].cost").value(hasItem(DEFAULT_COST)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllPowerCategoriesWithEagerRelationshipsIsEnabled() throws Exception {
+        when(powerCategoryRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restPowerCategoryMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(powerCategoryRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllPowerCategoriesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(powerCategoryRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restPowerCategoryMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(powerCategoryRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test

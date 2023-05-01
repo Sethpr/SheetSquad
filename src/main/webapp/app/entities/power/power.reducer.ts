@@ -23,6 +23,11 @@ export const getEntities = createAsyncThunk('power/fetch_entity_list', async ({ 
   return axios.get<IPower[]>(requestUrl);
 });
 
+export const getPowers = createAsyncThunk('power/fetch_entity_list', async () => {
+  const requestUrl = `${apiUrl}`;
+  return axios.get<IPower[]>(requestUrl);
+});
+
 export const getEntity = createAsyncThunk(
   'power/fetch_entity',
   async (id: string | number) => {

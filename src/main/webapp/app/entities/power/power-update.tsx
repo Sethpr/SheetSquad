@@ -8,10 +8,10 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IPowerCategory } from 'app/shared/model/power-category.model';
-import { getEntities as getPowerCategories } from 'app/entities/power-category/power-category.reducer';
 import { IPool } from 'app/shared/model/pool.model';
 import { getEntities as getPools } from 'app/entities/pool/pool.reducer';
+import { IPowerCategory } from 'app/shared/model/power-category.model';
+import { getEntities as getPowerCategories } from 'app/entities/power-category/power-category.reducer';
 import { IPower } from 'app/shared/model/power.model';
 import { getEntity, updateEntity, createEntity, reset } from './power.reducer';
 
@@ -23,8 +23,8 @@ export const PowerUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const powerCategories = useAppSelector(state => state.powerCategory.entities);
   const pools = useAppSelector(state => state.pool.entities);
+  const powerCategories = useAppSelector(state => state.powerCategory.entities);
   const powerEntity = useAppSelector(state => state.power.entity);
   const loading = useAppSelector(state => state.power.loading);
   const updating = useAppSelector(state => state.power.updating);
@@ -41,8 +41,8 @@ export const PowerUpdate = () => {
       dispatch(getEntity(id));
     }
 
-    dispatch(getPowerCategories({}));
     dispatch(getPools({}));
+    dispatch(getPowerCategories({}));
   }, []);
 
   useEffect(() => {
@@ -55,8 +55,8 @@ export const PowerUpdate = () => {
     const entity = {
       ...powerEntity,
       ...values,
-      owner: powerCategories.find(it => it.id.toString() === values.owner.toString()),
       pool: pools.find(it => it.id.toString() === values.pool.toString()),
+      owner: powerCategories.find(it => it.id.toString() === values.owner.toString()),
     };
 
     if (isNew) {
@@ -71,8 +71,8 @@ export const PowerUpdate = () => {
       ? {}
       : {
           ...powerEntity,
-          owner: powerEntity?.owner?.id,
           pool: powerEntity?.pool?.id,
+          owner: powerEntity?.owner?.id,
         };
 
   return (
@@ -113,22 +113,22 @@ export const PowerUpdate = () => {
                 }}
               />
               <ValidatedField label="Notes" id="power-notes" name="notes" data-cy="notes" type="text" />
-              <ValidatedField id="power-owner" name="owner" data-cy="owner" label="Owner" type="select">
-                <option value="" key="0" />
-                {powerCategories
-                  ? powerCategories.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
               <ValidatedField id="power-pool" name="pool" data-cy="pool" label="Pool" type="select">
                 <option value="" key="0" />
                 {pools
                   ? pools.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField id="power-owner" name="owner" data-cy="owner" label="Owner" type="select">
+                <option value="" key="0" />
+                {powerCategories
+                  ? powerCategories.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.name}
                       </option>
                     ))
                   : null}

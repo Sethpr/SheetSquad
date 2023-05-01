@@ -23,10 +23,10 @@
             <column name="notes" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="owner_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="pool_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_power__pool_id" />
+            </column>
+            <column name="owner_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

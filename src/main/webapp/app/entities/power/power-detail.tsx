@@ -40,10 +40,10 @@ export const PowerDetail = () => {
             <span id="notes">Notes</span>
           </dt>
           <dd>{powerEntity.notes}</dd>
-          <dt>Owner</dt>
-          <dd>{powerEntity.owner ? powerEntity.owner.id : ''}</dd>
           <dt>Pool</dt>
           <dd>{powerEntity.pool ? powerEntity.pool.id : ''}</dd>
+          <dt>Owner</dt>
+          <dd>{powerEntity.owner ? powerEntity.owner.name : ''}</dd>
         </dl>
         <Button tag={Link} to="/power" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

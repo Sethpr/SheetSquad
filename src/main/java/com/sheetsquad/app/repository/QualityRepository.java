@@ -11,21 +11,30 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Spring Data JPA repository for the Quality entity.
- *
- * When extending this class, extend QualityRepositoryWithBagRelationships too.
- * For more information refer to https://github.com/jhipster/generator-jhipster/issues/17990.
  */
 @Repository
-public interface QualityRepository extends QualityRepositoryWithBagRelationships, JpaRepository<Quality, Long> {
+public interface QualityRepository extends JpaRepository<Quality, Long> {
     default Optional<Quality> findOneWithEagerRelationships(Long id) {
-        return this.fetchBagRelationships(this.findById(id));
+        return this.findOneWithToOneRelationships(id);
     }
 
     default List<Quality> findAllWithEagerRelationships() {
-        return this.fetchBagRelationships(this.findAll());
+        return this.findAllWithToOneRelationships();
     }
 
     default Page<Quality> findAllWithEagerRelationships(Pageable pageable) {
-        return this.fetchBagRelationships(this.findAll(pageable));
+        return this.findAllWithToOneRelationships(pageable);
     }
+
+    @Query(
+        value = "select distinct quality from Quality quality left join fetch quality.owner",
+        countQuery = "select count(distinct quality) from Quality quality"
+    )
+    Page<Quality> findAllWithToOneRelationships(Pageable pageable);
+
+    @Query("select distinct quality from Quality quality left join fetch quality.owner")
+    List<Quality> findAllWithToOneRelationships();
+
+    @Query("select quality from Quality quality left join fetch quality.owner where quality.id =:id")
+    Optional<Quality> findOneWithToOneRelationships(@Param("id") Long id);
 }

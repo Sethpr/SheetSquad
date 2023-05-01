@@ -49,18 +49,9 @@ export const QualityDetail = () => {
           </dt>
           <dd>{qualityEntity.cost}</dd>
           <dt>Owner</dt>
-          <dd>{qualityEntity.owner ? qualityEntity.owner.id : ''}</dd>
+          <dd>{qualityEntity.owner ? qualityEntity.owner.name : ''}</dd>
           <dt>Extra</dt>
-          <dd>
-            {qualityEntity.extras
-              ? qualityEntity.extras.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {qualityEntity.extras && i === qualityEntity.extras.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
+          <dd>{qualityEntity.extra ? qualityEntity.extra.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/quality" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

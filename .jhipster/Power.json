@@ -27,13 +27,15 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityName": "powerCategory",
-      "relationshipName": "owner",
-      "relationshipType": "many-to-one"
+      "otherEntityName": "pool",
+      "ownerSide": true,
+      "relationshipName": "pool",
+      "relationshipType": "one-to-one"
     },
     {
-      "otherEntityName": "pool",
-      "relationshipName": "pool",
+      "otherEntityField": "name",
+      "otherEntityName": "powerCategory",
+      "relationshipName": "owner",
       "relationshipType": "many-to-one"
     }
   ],

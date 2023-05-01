@@ -3,8 +3,6 @@ package com.sheetsquad.app.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sheetsquad.app.domain.enumeration.StatType;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -32,23 +30,20 @@ public class Stat implements Serializable {
     @Column(name = "type", nullable = false)
     private StatType type;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(unique = true)
     private Pool pool;
 
     @ManyToOne
+    @JsonIgnoreProperties(value = { "base" }, allowSetters = true)
+    private Extra extra;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "archetype", "owner" }, allowSetters = true)
+    private Character owner;
+
+    @ManyToOne
     private Refrence refrence;
-
-    @ManyToMany
-    @JoinTable(name = "rel_stat__extra", joinColumns = @JoinColumn(name = "stat_id"), inverseJoinColumns = @JoinColumn(name = "extra_id"))
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "base", "powers", "stats", "skills" }, allowSetters = true)
-    private Set<Extra> extras = new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(name = "rel_stat__owner", joinColumns = @JoinColumn(name = "stat_id"), inverseJoinColumns = @JoinColumn(name = "owner_id"))
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "archetype", "owner", "stats", "skills" }, allowSetters = true)
-    private Set<Character> owners = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -91,6 +86,32 @@ public class Stat implements Serializable {
         return this;
     }
 
+    public Extra getExtra() {
+        return this.extra;
+    }
+
+    public void setExtra(Extra extra) {
+        this.extra = extra;
+    }
+
+    public Stat extra(Extra extra) {
+        this.setExtra(extra);
+        return this;
+    }
+
+    public Character getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(Character character) {
+        this.owner = character;
+    }
+
+    public Stat owner(Character character) {
+        this.setOwner(character);
+        return this;
+    }
+
     public Refrence getRefrence() {
         return this.refrence;
     }
@@ -101,56 +122,6 @@ public class Stat implements Serializable {
 
     public Stat refrence(Refrence refrence) {
         this.setRefrence(refrence);
-        return this;
-    }
-
-    public Set<Extra> getExtras() {
-        return this.extras;
-    }
-
-    public void setExtras(Set<Extra> extras) {
-        this.extras = extras;
-    }
-
-    public Stat extras(Set<Extra> extras) {
-        this.setExtras(extras);
-        return this;
-    }
-
-    public Stat addExtra(Extra extra) {
-        this.extras.add(extra);
-        extra.getStats().add(this);
-        return this;
-    }
-
-    public Stat removeExtra(Extra extra) {
-        this.extras.remove(extra);
-        extra.getStats().remove(this);
-        return this;
-    }
-
-    public Set<Character> getOwners() {
-        return this.owners;
-    }
-
-    public void setOwners(Set<Character> characters) {
-        this.owners = characters;
-    }
-
-    public Stat owners(Set<Character> characters) {
-        this.setOwners(characters);
-        return this;
-    }
-
-    public Stat addOwner(Character character) {
-        this.owners.add(character);
-        character.getStats().add(this);
-        return this;
-    }
-
-    public Stat removeOwner(Character character) {
-        this.owners.remove(character);
-        character.getStats().remove(this);
         return this;
     }
 

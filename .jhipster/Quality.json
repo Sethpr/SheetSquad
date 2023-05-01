@@ -40,16 +40,15 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "name",
       "otherEntityName": "power",
       "relationshipName": "owner",
       "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "extra",
-      "otherEntityRelationshipName": "power",
-      "ownerSide": true,
       "relationshipName": "extra",
-      "relationshipType": "many-to-many"
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "no"

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sheetsquad.app.domain.enumeration.Capacity;
 import com.sheetsquad.app.domain.enumeration.QualityType;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -51,18 +49,12 @@ public class Quality implements Serializable {
     private Integer cost;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "owner", "pool" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "pool", "owner" }, allowSetters = true)
     private Power owner;
 
-    @ManyToMany
-    @JoinTable(
-        name = "rel_quality__extra",
-        joinColumns = @JoinColumn(name = "quality_id"),
-        inverseJoinColumns = @JoinColumn(name = "extra_id")
-    )
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "base", "powers", "stats", "skills" }, allowSetters = true)
-    private Set<Extra> extras = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "base" }, allowSetters = true)
+    private Extra extra;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -157,28 +149,16 @@ public class Quality implements Serializable {
         return this;
     }
 
-    public Set<Extra> getExtras() {
-        return this.extras;
+    public Extra getExtra() {
+        return this.extra;
     }
 
-    public void setExtras(Set<Extra> extras) {
-        this.extras = extras;
+    public void setExtra(Extra extra) {
+        this.extra = extra;
     }
 
-    public Quality extras(Set<Extra> extras) {
-        this.setExtras(extras);
-        return this;
-    }
-
-    public Quality addExtra(Extra extra) {
-        this.extras.add(extra);
-        extra.getPowers().add(this);
-        return this;
-    }
-
-    public Quality removeExtra(Extra extra) {
-        this.extras.remove(extra);
-        extra.getPowers().remove(this);
+    public Quality extra(Extra extra) {
+        this.setExtra(extra);
         return this;
     }
 

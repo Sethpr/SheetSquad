@@ -162,6 +162,23 @@ class CharacterResourceIT {
 
     @Test
     @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = characterRepository.findAll().size();
+        // set the field null
+        character.setName(null);
+
+        // Create the Character, which fails.
+
+        restCharacterMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(character)))
+            .andExpect(status().isBadRequest());
+
+        List<Character> characterList = characterRepository.findAll();
+        assertThat(characterList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void checkPointTotalIsRequired() throws Exception {
         int databaseSizeBeforeTest = characterRepository.findAll().size();
         // set the field null

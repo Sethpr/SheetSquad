@@ -38,30 +38,12 @@ export const SkillDetail = () => {
           <dd>{skillEntity.under}</dd>
           <dt>Pool</dt>
           <dd>{skillEntity.pool ? skillEntity.pool.id : ''}</dd>
+          <dt>Extra</dt>
+          <dd>{skillEntity.extra ? skillEntity.extra.id : ''}</dd>
+          <dt>Owner</dt>
+          <dd>{skillEntity.owner ? skillEntity.owner.name : ''}</dd>
           <dt>Refrence</dt>
           <dd>{skillEntity.refrence ? skillEntity.refrence.id : ''}</dd>
-          <dt>Extra</dt>
-          <dd>
-            {skillEntity.extras
-              ? skillEntity.extras.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {skillEntity.extras && i === skillEntity.extras.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
-          <dt>Owner</dt>
-          <dd>
-            {skillEntity.owners
-              ? skillEntity.owners.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {skillEntity.owners && i === skillEntity.owners.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
         </dl>
         <Button tag={Link} to="/skill" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

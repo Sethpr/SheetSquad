@@ -14,34 +14,22 @@
                                  referencedColumnNames="id"
                                  referencedTableName="pool"/>
 
+        <addForeignKeyConstraint baseColumnNames="extra_id"
+                                 baseTableName="stat"
+                                 constraintName="fk_stat__extra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="extra"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="stat"
+                                 constraintName="fk_stat__owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="character"/>
+
         <addForeignKeyConstraint baseColumnNames="refrence_id"
                                  baseTableName="stat"
                                  constraintName="fk_stat__refrence_id"
                                  referencedColumnNames="id"
                                  referencedTableName="refrence"/>
-
-        <addForeignKeyConstraint baseColumnNames="stat_id"
-                                 baseTableName="rel_stat__extra"
-                                 constraintName="fk_rel_stat__extra__stat_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="stat"/>
-
-        <addForeignKeyConstraint baseColumnNames="extra_id"
-                                 baseTableName="rel_stat__extra"
-                                 constraintName="fk_rel_stat__extra__extra_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="extra"/>
-
-        <addForeignKeyConstraint baseColumnNames="stat_id"
-                                 baseTableName="rel_stat__owner"
-                                 constraintName="fk_rel_stat__owner__stat_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="stat"/>
-
-        <addForeignKeyConstraint baseColumnNames="owner_id"
-                                 baseTableName="rel_stat__owner"
-                                 constraintName="fk_rel_stat__owner__owner_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="character"/>
     </changeSet>
 </databaseChangeLog>

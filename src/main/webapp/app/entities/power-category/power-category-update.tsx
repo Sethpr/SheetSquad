@@ -114,7 +114,7 @@ export const PowerCategoryUpdate = () => {
                 {characters
                   ? characters.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.name}
                       </option>
                     ))
                   : null}

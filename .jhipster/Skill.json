@@ -26,27 +26,25 @@
   "relationships": [
     {
       "otherEntityName": "pool",
+      "ownerSide": true,
       "relationshipName": "pool",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "extra",
+      "relationshipName": "extra",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "character",
+      "relationshipName": "owner",
       "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "refrence",
       "relationshipName": "refrence",
       "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "extra",
-      "otherEntityRelationshipName": "skill",
-      "ownerSide": true,
-      "relationshipName": "extra",
-      "relationshipType": "many-to-many"
-    },
-    {
-      "otherEntityName": "character",
-      "otherEntityRelationshipName": "skill",
-      "ownerSide": true,
-      "relationshipName": "owner",
-      "relationshipType": "many-to-many"
     }
   ],
   "service": "no"

@@ -36,7 +36,7 @@ public class PowerCategory implements Serializable {
     private Integer cost;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "archetype", "owner", "stats", "skills" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "archetype", "owner" }, allowSetters = true)
     private Character owner;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -1,9 +1,6 @@
 package com.sheetsquad.app.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -26,7 +23,8 @@ public class Character implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "talent_name")
@@ -55,16 +53,6 @@ public class Character implements Serializable {
 
     @ManyToOne
     private User owner;
-
-    @ManyToMany(mappedBy = "owners")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "pool", "refrence", "extras", "owners" }, allowSetters = true)
-    private Set<Stat> stats = new HashSet<>();
-
-    @ManyToMany(mappedBy = "owners")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "pool", "refrence", "extras", "owners" }, allowSetters = true)
-    private Set<Skill> skills = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -195,68 +183,6 @@ public class Character implements Serializable {
 
     public Character owner(User user) {
         this.setOwner(user);
-        return this;
-    }
-
-    public Set<Stat> getStats() {
-        return this.stats;
-    }
-
-    public void setStats(Set<Stat> stats) {
-        if (this.stats != null) {
-            this.stats.forEach(i -> i.removeOwner(this));
-        }
-        if (stats != null) {
-            stats.forEach(i -> i.addOwner(this));
-        }
-        this.stats = stats;
-    }
-
-    public Character stats(Set<Stat> stats) {
-        this.setStats(stats);
-        return this;
-    }
-
-    public Character addStat(Stat stat) {
-        this.stats.add(stat);
-        stat.getOwners().add(this);
-        return this;
-    }
-
-    public Character removeStat(Stat stat) {
-        this.stats.remove(stat);
-        stat.getOwners().remove(this);
-        return this;
-    }
-
-    public Set<Skill> getSkills() {
-        return this.skills;
-    }
-
-    public void setSkills(Set<Skill> skills) {
-        if (this.skills != null) {
-            this.skills.forEach(i -> i.removeOwner(this));
-        }
-        if (skills != null) {
-            skills.forEach(i -> i.addOwner(this));
-        }
-        this.skills = skills;
-    }
-
-    public Character skills(Set<Skill> skills) {
-        this.setSkills(skills);
-        return this;
-    }
-
-    public Character addSkill(Skill skill) {
-        this.skills.add(skill);
-        skill.getOwners().add(this);
-        return this;
-    }
-
-    public Character removeSkill(Skill skill) {
-        this.skills.remove(skill);
-        skill.getOwners().remove(this);
         return this;
     }
 

@@ -10,12 +10,6 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IBaseExtra } from 'app/shared/model/base-extra.model';
 import { getEntities as getBaseExtras } from 'app/entities/base-extra/base-extra.reducer';
-import { IQuality } from 'app/shared/model/quality.model';
-import { getEntities as getQualities } from 'app/entities/quality/quality.reducer';
-import { IStat } from 'app/shared/model/stat.model';
-import { getEntities as getStats } from 'app/entities/stat/stat.reducer';
-import { ISkill } from 'app/shared/model/skill.model';
-import { getEntities as getSkills } from 'app/entities/skill/skill.reducer';
 import { IExtra } from 'app/shared/model/extra.model';
 import { Capacity } from 'app/shared/model/enumerations/capacity.model';
 import { getEntity, updateEntity, createEntity, reset } from './extra.reducer';
@@ -29,9 +23,6 @@ export const ExtraUpdate = () => {
   const isNew = id === undefined;
 
   const baseExtras = useAppSelector(state => state.baseExtra.entities);
-  const qualities = useAppSelector(state => state.quality.entities);
-  const stats = useAppSelector(state => state.stat.entities);
-  const skills = useAppSelector(state => state.skill.entities);
   const extraEntity = useAppSelector(state => state.extra.entity);
   const loading = useAppSelector(state => state.extra.loading);
   const updating = useAppSelector(state => state.extra.updating);
@@ -50,9 +41,6 @@ export const ExtraUpdate = () => {
     }
 
     dispatch(getBaseExtras({}));
-    dispatch(getQualities({}));
-    dispatch(getStats({}));
-    dispatch(getSkills({}));
   }, []);
 
   useEffect(() => {

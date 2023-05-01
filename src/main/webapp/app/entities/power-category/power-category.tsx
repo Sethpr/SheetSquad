@@ -65,7 +65,7 @@ export const PowerCategory = () => {
                   <td>{powerCategory.name}</td>
                   <td>{powerCategory.priority}</td>
                   <td>{powerCategory.cost}</td>
-                  <td>{powerCategory.owner ? <Link to={`/character/${powerCategory.owner.id}`}>{powerCategory.owner.id}</Link> : ''}</td>
+                  <td>{powerCategory.owner ? <Link to={`/character/${powerCategory.owner.id}`}>{powerCategory.owner.name}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/power-category/${powerCategory.id}`} color="info" size="sm" data-cy="entityDetailsButton">

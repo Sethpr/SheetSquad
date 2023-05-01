@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 import {} from 'react-jhipster';
@@ -8,6 +8,8 @@ import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './character.reducer';
+import { getPowerCategoiesByOwner } from '../power-category/power-category.reducer';
+import { getPowers } from '../power/power.reducer';
 
 export const CharacterDetail = () => {
   const dispatch = useAppDispatch();
@@ -16,9 +18,15 @@ export const CharacterDetail = () => {
 
   useEffect(() => {
     dispatch(getEntity(id));
-  }, []);
+    dispatch(getPowerCategoiesByOwner(id));
+    dispatch(getPowers());
+  }, [dispatch, id]);
 
   const characterEntity = useAppSelector(state => state.character.entity);
+  const powerCategories = useAppSelector(state => state.powerCategory.entities);
+  const powers = useAppSelector(state => state.power.entities);
+
+  console.log('powerCategories:', powerCategories);
   return (
     <Row>
       <Col md="8">
@@ -105,6 +113,28 @@ export const CharacterDetail = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            <h2>Powers:</h2>
+            <ul>
+              {powerCategories.map(category => (
+                <>
+                  <li key={category.id}>{category.name}</li>
+                  <ul>
+                    {powers
+                      .filter(power => {
+                        if (power.owner === null) {
+                          return false;
+                        }
+                        return power.owner.id === category.id;
+                      })
+                      .map(power => (
+                        <li>{power.name}</li>
+                      ))}
+                  </ul>
+                </>
+              ))}
+            </ul>
           </div>
         </dl>
         <Button tag={Link} to="/character" replace color="info" data-cy="entityDetailsBackButton">

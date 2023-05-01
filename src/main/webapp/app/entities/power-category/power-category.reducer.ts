@@ -20,6 +20,12 @@ const apiUrl = 'api/power-categories';
 
 export const getEntities = createAsyncThunk('powerCategory/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
   const requestUrl = `${apiUrl}?cacheBuster=${new Date().getTime()}`;
+  console.log(requestUrl);
+  return axios.get<IPowerCategory[]>(requestUrl);
+});
+
+export const getPowerCategoiesByOwner = createAsyncThunk('powerCategory/fetch_entity_list', async (id: string | number) => {
+  const requestUrl = `${apiUrl}/owner/${id}`;
   return axios.get<IPowerCategory[]>(requestUrl);
 });
 

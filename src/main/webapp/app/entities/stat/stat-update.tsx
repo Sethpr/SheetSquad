@@ -10,12 +10,12 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IPool } from 'app/shared/model/pool.model';
 import { getEntities as getPools } from 'app/entities/pool/pool.reducer';
-import { IRefrence } from 'app/shared/model/refrence.model';
-import { getEntities as getRefrences } from 'app/entities/refrence/refrence.reducer';
 import { IExtra } from 'app/shared/model/extra.model';
 import { getEntities as getExtras } from 'app/entities/extra/extra.reducer';
 import { ICharacter } from 'app/shared/model/character.model';
 import { getEntities as getCharacters } from 'app/entities/character/character.reducer';
+import { IRefrence } from 'app/shared/model/refrence.model';
+import { getEntities as getRefrences } from 'app/entities/refrence/refrence.reducer';
 import { IStat } from 'app/shared/model/stat.model';
 import { StatType } from 'app/shared/model/enumerations/stat-type.model';
 import { getEntity, updateEntity, createEntity, reset } from './stat.reducer';
@@ -29,9 +29,9 @@ export const StatUpdate = () => {
   const isNew = id === undefined;
 
   const pools = useAppSelector(state => state.pool.entities);
-  const refrences = useAppSelector(state => state.refrence.entities);
   const extras = useAppSelector(state => state.extra.entities);
   const characters = useAppSelector(state => state.character.entities);
+  const refrences = useAppSelector(state => state.refrence.entities);
   const statEntity = useAppSelector(state => state.stat.entity);
   const loading = useAppSelector(state => state.stat.loading);
   const updating = useAppSelector(state => state.stat.updating);
@@ -50,9 +50,9 @@ export const StatUpdate = () => {
     }
 
     dispatch(getPools({}));
-    dispatch(getRefrences({}));
     dispatch(getExtras({}));
     dispatch(getCharacters({}));
+    dispatch(getRefrences({}));
   }, []);
 
   useEffect(() => {
@@ -65,9 +65,9 @@ export const StatUpdate = () => {
     const entity = {
       ...statEntity,
       ...values,
-      extras: mapIdList(values.extras),
-      owners: mapIdList(values.owners),
       pool: pools.find(it => it.id.toString() === values.pool.toString()),
+      extra: extras.find(it => it.id.toString() === values.extra.toString()),
+      owner: characters.find(it => it.id.toString() === values.owner.toString()),
       refrence: refrences.find(it => it.id.toString() === values.refrence.toString()),
     };
 
@@ -85,9 +85,9 @@ export const StatUpdate = () => {
           type: 'BODY',
           ...statEntity,
           pool: statEntity?.pool?.id,
+          extra: statEntity?.extra?.id,
+          owner: statEntity?.owner?.id,
           refrence: statEntity?.refrence?.id,
-          extras: statEntity?.extras?.map(e => e.id.toString()),
-          owners: statEntity?.owners?.map(e => e.id.toString()),
         };
 
   return (
@@ -123,17 +123,7 @@ export const StatUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField id="stat-refrence" name="refrence" data-cy="refrence" label="Refrence" type="select">
-                <option value="" key="0" />
-                {refrences
-                  ? refrences.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField label="Extra" id="stat-extra" data-cy="extra" type="select" multiple name="extras">
+              <ValidatedField id="stat-extra" name="extra" data-cy="extra" label="Extra" type="select">
                 <option value="" key="0" />
                 {extras
                   ? extras.map(otherEntity => (
@@ -143,10 +133,20 @@ export const StatUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField label="Owner" id="stat-owner" data-cy="owner" type="select" multiple name="owners">
+              <ValidatedField id="stat-owner" name="owner" data-cy="owner" label="Owner" type="select">
                 <option value="" key="0" />
                 {characters
                   ? characters.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.name}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField id="stat-refrence" name="refrence" data-cy="refrence" label="Refrence" type="select">
+                <option value="" key="0" />
+                {refrences
+                  ? refrences.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

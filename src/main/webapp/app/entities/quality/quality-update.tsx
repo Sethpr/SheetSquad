@@ -59,8 +59,8 @@ export const QualityUpdate = () => {
     const entity = {
       ...qualityEntity,
       ...values,
-      extras: mapIdList(values.extras),
       owner: powers.find(it => it.id.toString() === values.owner.toString()),
+      extra: extras.find(it => it.id.toString() === values.extra.toString()),
     };
 
     if (isNew) {
@@ -80,7 +80,7 @@ export const QualityUpdate = () => {
           capacity3: 'SPEED',
           ...qualityEntity,
           owner: qualityEntity?.owner?.id,
-          extras: qualityEntity?.extras?.map(e => e.id.toString()),
+          extra: qualityEntity?.extra?.id,
         };
 
   return (
@@ -143,12 +143,12 @@ export const QualityUpdate = () => {
                 {powers
                   ? powers.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.name}
                       </option>
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField label="Extra" id="quality-extra" data-cy="extra" type="select" multiple name="extras">
+              <ValidatedField id="quality-extra" name="extra" data-cy="extra" label="Extra" type="select">
                 <option value="" key="0" />
                 {extras
                   ? extras.map(otherEntity => (

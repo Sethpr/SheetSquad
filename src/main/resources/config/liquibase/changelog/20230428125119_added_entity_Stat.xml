@@ -18,6 +18,12 @@
                 <constraints nullable="false" />
             </column>
             <column name="pool_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_stat__pool_id" />
+            </column>
+            <column name="extra_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="owner_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="refrence_id" type="bigint">
@@ -25,31 +31,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-    </changeSet>
-
-    <changeSet id="20230428125119-1-relations" author="jhipster">
-
-        <createTable tableName="rel_stat__extra">
-            <column name="extra_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="stat_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="stat_id, extra_id" tableName="rel_stat__extra"/>
-
-        <createTable tableName="rel_stat__owner">
-            <column name="owner_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="stat_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="stat_id, owner_id" tableName="rel_stat__owner"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

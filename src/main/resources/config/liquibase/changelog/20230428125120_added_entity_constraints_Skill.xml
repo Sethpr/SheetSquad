@@ -14,34 +14,22 @@
                                  referencedColumnNames="id"
                                  referencedTableName="pool"/>
 
+        <addForeignKeyConstraint baseColumnNames="extra_id"
+                                 baseTableName="skill"
+                                 constraintName="fk_skill__extra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="extra"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="skill"
+                                 constraintName="fk_skill__owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="character"/>
+
         <addForeignKeyConstraint baseColumnNames="refrence_id"
                                  baseTableName="skill"
                                  constraintName="fk_skill__refrence_id"
                                  referencedColumnNames="id"
                                  referencedTableName="refrence"/>
-
-        <addForeignKeyConstraint baseColumnNames="skill_id"
-                                 baseTableName="rel_skill__extra"
-                                 constraintName="fk_rel_skill__extra__skill_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="skill"/>
-
-        <addForeignKeyConstraint baseColumnNames="extra_id"
-                                 baseTableName="rel_skill__extra"
-                                 constraintName="fk_rel_skill__extra__extra_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="extra"/>
-
-        <addForeignKeyConstraint baseColumnNames="skill_id"
-                                 baseTableName="rel_skill__owner"
-                                 constraintName="fk_rel_skill__owner__skill_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="skill"/>
-
-        <addForeignKeyConstraint baseColumnNames="owner_id"
-                                 baseTableName="rel_skill__owner"
-                                 constraintName="fk_rel_skill__owner__owner_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="character"/>
     </changeSet>
 </databaseChangeLog>
