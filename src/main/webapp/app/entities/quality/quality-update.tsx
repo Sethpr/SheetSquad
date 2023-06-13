@@ -74,7 +74,7 @@ export const QualityUpdate = () => {
     isNew
       ? {}
       : {
-          type: 'ATTACK',
+          qualityType: 'ATTACK',
           capacity1: 'SPEED',
           capacity2: 'SPEED',
           capacity3: 'SPEED',
@@ -99,7 +99,7 @@ export const QualityUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="quality-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Type" id="quality-type" name="type" data-cy="type" type="select">
+              <ValidatedField label="Quality Type" id="quality-qualityType" name="qualityType" data-cy="qualityType" type="select">
                 {qualityTypeValues.map(qualityType => (
                   <option value={qualityType} key={qualityType}>
                     {qualityType}

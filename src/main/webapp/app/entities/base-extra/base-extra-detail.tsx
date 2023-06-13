@@ -33,9 +33,9 @@ export const BaseExtraDetail = () => {
           </dt>
           <dd>{baseExtraEntity.name}</dd>
           <dt>
-            <span id="value">Value</span>
+            <span id="cost">Cost</span>
           </dt>
-          <dd>{baseExtraEntity.value}</dd>
+          <dd>{baseExtraEntity.cost}</dd>
           <dt>Refrence</dt>
           <dd>{baseExtraEntity.refrence ? baseExtraEntity.refrence.id : ''}</dd>
         </dl>

@@ -42,8 +42,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class QualityResourceIT {
 
-    private static final QualityType DEFAULT_TYPE = QualityType.ATTACK;
-    private static final QualityType UPDATED_TYPE = QualityType.USEFUL;
+    private static final QualityType DEFAULT_QUALITY_TYPE = QualityType.ATTACK;
+    private static final QualityType UPDATED_QUALITY_TYPE = QualityType.USEFUL;
 
     private static final Capacity DEFAULT_CAPACITY_1 = Capacity.SPEED;
     private static final Capacity UPDATED_CAPACITY_1 = Capacity.RANGE;
@@ -85,7 +85,7 @@ class QualityResourceIT {
      */
     public static Quality createEntity(EntityManager em) {
         Quality quality = new Quality()
-            .type(DEFAULT_TYPE)
+            .qualityType(DEFAULT_QUALITY_TYPE)
             .capacity1(DEFAULT_CAPACITY_1)
             .capacity2(DEFAULT_CAPACITY_2)
             .capacity3(DEFAULT_CAPACITY_3)
@@ -101,7 +101,7 @@ class QualityResourceIT {
      */
     public static Quality createUpdatedEntity(EntityManager em) {
         Quality quality = new Quality()
-            .type(UPDATED_TYPE)
+            .qualityType(UPDATED_QUALITY_TYPE)
             .capacity1(UPDATED_CAPACITY_1)
             .capacity2(UPDATED_CAPACITY_2)
             .capacity3(UPDATED_CAPACITY_3)
@@ -127,7 +127,7 @@ class QualityResourceIT {
         List<Quality> qualityList = qualityRepository.findAll();
         assertThat(qualityList).hasSize(databaseSizeBeforeCreate + 1);
         Quality testQuality = qualityList.get(qualityList.size() - 1);
-        assertThat(testQuality.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testQuality.getQualityType()).isEqualTo(DEFAULT_QUALITY_TYPE);
         assertThat(testQuality.getCapacity1()).isEqualTo(DEFAULT_CAPACITY_1);
         assertThat(testQuality.getCapacity2()).isEqualTo(DEFAULT_CAPACITY_2);
         assertThat(testQuality.getCapacity3()).isEqualTo(DEFAULT_CAPACITY_3);
@@ -154,10 +154,10 @@ class QualityResourceIT {
 
     @Test
     @Transactional
-    void checkTypeIsRequired() throws Exception {
+    void checkQualityTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = qualityRepository.findAll().size();
         // set the field null
-        quality.setType(null);
+        quality.setQualityType(null);
 
         // Create the Quality, which fails.
 
@@ -215,7 +215,7 @@ class QualityResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(quality.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].qualityType").value(hasItem(DEFAULT_QUALITY_TYPE.toString())))
             .andExpect(jsonPath("$.[*].capacity1").value(hasItem(DEFAULT_CAPACITY_1.toString())))
             .andExpect(jsonPath("$.[*].capacity2").value(hasItem(DEFAULT_CAPACITY_2.toString())))
             .andExpect(jsonPath("$.[*].capacity3").value(hasItem(DEFAULT_CAPACITY_3.toString())))
@@ -251,7 +251,7 @@ class QualityResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(quality.getId().intValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.qualityType").value(DEFAULT_QUALITY_TYPE.toString()))
             .andExpect(jsonPath("$.capacity1").value(DEFAULT_CAPACITY_1.toString()))
             .andExpect(jsonPath("$.capacity2").value(DEFAULT_CAPACITY_2.toString()))
             .andExpect(jsonPath("$.capacity3").value(DEFAULT_CAPACITY_3.toString()))
@@ -278,7 +278,7 @@ class QualityResourceIT {
         // Disconnect from session so that the updates on updatedQuality are not directly saved in db
         em.detach(updatedQuality);
         updatedQuality
-            .type(UPDATED_TYPE)
+            .qualityType(UPDATED_QUALITY_TYPE)
             .capacity1(UPDATED_CAPACITY_1)
             .capacity2(UPDATED_CAPACITY_2)
             .capacity3(UPDATED_CAPACITY_3)
@@ -296,7 +296,7 @@ class QualityResourceIT {
         List<Quality> qualityList = qualityRepository.findAll();
         assertThat(qualityList).hasSize(databaseSizeBeforeUpdate);
         Quality testQuality = qualityList.get(qualityList.size() - 1);
-        assertThat(testQuality.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testQuality.getQualityType()).isEqualTo(UPDATED_QUALITY_TYPE);
         assertThat(testQuality.getCapacity1()).isEqualTo(UPDATED_CAPACITY_1);
         assertThat(testQuality.getCapacity2()).isEqualTo(UPDATED_CAPACITY_2);
         assertThat(testQuality.getCapacity3()).isEqualTo(UPDATED_CAPACITY_3);
@@ -371,7 +371,7 @@ class QualityResourceIT {
         Quality partialUpdatedQuality = new Quality();
         partialUpdatedQuality.setId(quality.getId());
 
-        partialUpdatedQuality.type(UPDATED_TYPE).capacity1(UPDATED_CAPACITY_1).capacity3(UPDATED_CAPACITY_3);
+        partialUpdatedQuality.qualityType(UPDATED_QUALITY_TYPE).capacity1(UPDATED_CAPACITY_1).capacity3(UPDATED_CAPACITY_3);
 
         restQualityMockMvc
             .perform(
@@ -385,7 +385,7 @@ class QualityResourceIT {
         List<Quality> qualityList = qualityRepository.findAll();
         assertThat(qualityList).hasSize(databaseSizeBeforeUpdate);
         Quality testQuality = qualityList.get(qualityList.size() - 1);
-        assertThat(testQuality.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testQuality.getQualityType()).isEqualTo(UPDATED_QUALITY_TYPE);
         assertThat(testQuality.getCapacity1()).isEqualTo(UPDATED_CAPACITY_1);
         assertThat(testQuality.getCapacity2()).isEqualTo(DEFAULT_CAPACITY_2);
         assertThat(testQuality.getCapacity3()).isEqualTo(UPDATED_CAPACITY_3);
@@ -405,7 +405,7 @@ class QualityResourceIT {
         partialUpdatedQuality.setId(quality.getId());
 
         partialUpdatedQuality
-            .type(UPDATED_TYPE)
+            .qualityType(UPDATED_QUALITY_TYPE)
             .capacity1(UPDATED_CAPACITY_1)
             .capacity2(UPDATED_CAPACITY_2)
             .capacity3(UPDATED_CAPACITY_3)
@@ -423,7 +423,7 @@ class QualityResourceIT {
         List<Quality> qualityList = qualityRepository.findAll();
         assertThat(qualityList).hasSize(databaseSizeBeforeUpdate);
         Quality testQuality = qualityList.get(qualityList.size() - 1);
-        assertThat(testQuality.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testQuality.getQualityType()).isEqualTo(UPDATED_QUALITY_TYPE);
         assertThat(testQuality.getCapacity1()).isEqualTo(UPDATED_CAPACITY_1);
         assertThat(testQuality.getCapacity2()).isEqualTo(UPDATED_CAPACITY_2);
         assertThat(testQuality.getCapacity3()).isEqualTo(UPDATED_CAPACITY_3);

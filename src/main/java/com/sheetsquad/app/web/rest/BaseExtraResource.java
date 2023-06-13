@@ -126,8 +126,8 @@ public class BaseExtraResource {
                 if (baseExtra.getName() != null) {
                     existingBaseExtra.setName(baseExtra.getName());
                 }
-                if (baseExtra.getValue() != null) {
-                    existingBaseExtra.setValue(baseExtra.getValue());
+                if (baseExtra.getCost() != null) {
+                    existingBaseExtra.setCost(baseExtra.getCost());
                 }
 
                 return existingBaseExtra;

@@ -1,4 +1,4 @@
-id;type;capacity_1;capacity_2;capacity_3;cost
+id;quality_type;capacity_1;capacity_2;capacity_3;cost
 1;ATTACK;MASS;MASS;SPEED;74808
 2;USEFUL;TOUCH;MASS;SELF;36656
 3;ATTACK;MASS;SPEED;SELF;5755

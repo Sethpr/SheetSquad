@@ -32,8 +32,8 @@ class BaseExtraResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_VALUE = 1;
-    private static final Integer UPDATED_VALUE = 2;
+    private static final Integer DEFAULT_COST = 1;
+    private static final Integer UPDATED_COST = 2;
 
     private static final String ENTITY_API_URL = "/api/base-extras";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -59,7 +59,7 @@ class BaseExtraResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static BaseExtra createEntity(EntityManager em) {
-        BaseExtra baseExtra = new BaseExtra().name(DEFAULT_NAME).value(DEFAULT_VALUE);
+        BaseExtra baseExtra = new BaseExtra().name(DEFAULT_NAME).cost(DEFAULT_COST);
         return baseExtra;
     }
 
@@ -70,7 +70,7 @@ class BaseExtraResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static BaseExtra createUpdatedEntity(EntityManager em) {
-        BaseExtra baseExtra = new BaseExtra().name(UPDATED_NAME).value(UPDATED_VALUE);
+        BaseExtra baseExtra = new BaseExtra().name(UPDATED_NAME).cost(UPDATED_COST);
         return baseExtra;
     }
 
@@ -93,7 +93,7 @@ class BaseExtraResourceIT {
         assertThat(baseExtraList).hasSize(databaseSizeBeforeCreate + 1);
         BaseExtra testBaseExtra = baseExtraList.get(baseExtraList.size() - 1);
         assertThat(testBaseExtra.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testBaseExtra.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testBaseExtra.getCost()).isEqualTo(DEFAULT_COST);
     }
 
     @Test
@@ -127,7 +127,7 @@ class BaseExtraResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(baseExtra.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
+            .andExpect(jsonPath("$.[*].cost").value(hasItem(DEFAULT_COST)));
     }
 
     @Test
@@ -143,7 +143,7 @@ class BaseExtraResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(baseExtra.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE));
+            .andExpect(jsonPath("$.cost").value(DEFAULT_COST));
     }
 
     @Test
@@ -165,7 +165,7 @@ class BaseExtraResourceIT {
         BaseExtra updatedBaseExtra = baseExtraRepository.findById(baseExtra.getId()).get();
         // Disconnect from session so that the updates on updatedBaseExtra are not directly saved in db
         em.detach(updatedBaseExtra);
-        updatedBaseExtra.name(UPDATED_NAME).value(UPDATED_VALUE);
+        updatedBaseExtra.name(UPDATED_NAME).cost(UPDATED_COST);
 
         restBaseExtraMockMvc
             .perform(
@@ -180,7 +180,7 @@ class BaseExtraResourceIT {
         assertThat(baseExtraList).hasSize(databaseSizeBeforeUpdate);
         BaseExtra testBaseExtra = baseExtraList.get(baseExtraList.size() - 1);
         assertThat(testBaseExtra.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testBaseExtra.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testBaseExtra.getCost()).isEqualTo(UPDATED_COST);
     }
 
     @Test
@@ -251,7 +251,7 @@ class BaseExtraResourceIT {
         BaseExtra partialUpdatedBaseExtra = new BaseExtra();
         partialUpdatedBaseExtra.setId(baseExtra.getId());
 
-        partialUpdatedBaseExtra.name(UPDATED_NAME).value(UPDATED_VALUE);
+        partialUpdatedBaseExtra.name(UPDATED_NAME).cost(UPDATED_COST);
 
         restBaseExtraMockMvc
             .perform(
@@ -266,7 +266,7 @@ class BaseExtraResourceIT {
         assertThat(baseExtraList).hasSize(databaseSizeBeforeUpdate);
         BaseExtra testBaseExtra = baseExtraList.get(baseExtraList.size() - 1);
         assertThat(testBaseExtra.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testBaseExtra.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testBaseExtra.getCost()).isEqualTo(UPDATED_COST);
     }
 
     @Test
@@ -281,7 +281,7 @@ class BaseExtraResourceIT {
         BaseExtra partialUpdatedBaseExtra = new BaseExtra();
         partialUpdatedBaseExtra.setId(baseExtra.getId());
 
-        partialUpdatedBaseExtra.name(UPDATED_NAME).value(UPDATED_VALUE);
+        partialUpdatedBaseExtra.name(UPDATED_NAME).cost(UPDATED_COST);
 
         restBaseExtraMockMvc
             .perform(
@@ -296,7 +296,7 @@ class BaseExtraResourceIT {
         assertThat(baseExtraList).hasSize(databaseSizeBeforeUpdate);
         BaseExtra testBaseExtra = baseExtraList.get(baseExtraList.size() - 1);
         assertThat(testBaseExtra.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testBaseExtra.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testBaseExtra.getCost()).isEqualTo(UPDATED_COST);
     }
 
     @Test

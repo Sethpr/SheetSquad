@@ -5,7 +5,7 @@ import { Capacity } from 'app/shared/model/enumerations/capacity.model';
 
 export interface IQuality {
   id?: number;
-  type?: QualityType;
+  qualityType?: QualityType;
   capacity1?: Capacity;
   capacity2?: Capacity | null;
   capacity3?: Capacity | null;

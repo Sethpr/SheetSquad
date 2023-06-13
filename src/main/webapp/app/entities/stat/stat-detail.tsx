@@ -29,9 +29,9 @@ export const StatDetail = () => {
           </dt>
           <dd>{statEntity.id}</dd>
           <dt>
-            <span id="type">Type</span>
+            <span id="statType">Stat Type</span>
           </dt>
-          <dd>{statEntity.type}</dd>
+          <dd>{statEntity.statType}</dd>
           <dt>Pool</dt>
           <dd>{statEntity.pool ? statEntity.pool.id : ''}</dd>
           <dt>Extra</dt>

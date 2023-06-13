@@ -6,7 +6,7 @@
   "entityTableName": "stat",
   "fields": [
     {
-      "fieldName": "type",
+      "fieldName": "statType",
       "fieldType": "StatType",
       "fieldValidateRules": ["required"],
       "fieldValues": "BODY,COORDINATION,SENSE,MIND,CHARM,COMMAND"

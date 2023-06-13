@@ -29,13 +29,13 @@ export const SkillDetail = () => {
           </dt>
           <dd>{skillEntity.id}</dd>
           <dt>
-            <span id="type">Type</span>
+            <span id="skillType">Skill Type</span>
           </dt>
-          <dd>{skillEntity.type}</dd>
+          <dd>{skillEntity.skillType}</dd>
           <dt>
-            <span id="under">Under</span>
+            <span id="refrenceStat">Refrence Stat</span>
           </dt>
-          <dd>{skillEntity.under}</dd>
+          <dd>{skillEntity.refrenceStat}</dd>
           <dt>Pool</dt>
           <dd>{skillEntity.pool ? skillEntity.pool.id : ''}</dd>
           <dt>Extra</dt>

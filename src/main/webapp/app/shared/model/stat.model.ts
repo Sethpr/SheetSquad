@@ -6,7 +6,7 @@ import { StatType } from 'app/shared/model/enumerations/stat-type.model';
 
 export interface IStat {
   id?: number;
-  type?: StatType;
+  statType?: StatType;
   pool?: IPool | null;
   extra?: IExtra | null;
   owner?: ICharacter | null;

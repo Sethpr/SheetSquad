@@ -14,10 +14,10 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="type" type="varchar(255)">
+            <column name="skill_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="under" type="varchar(255)">
+            <column name="refrence_stat" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="pool_id" type="bigint">
@@ -53,8 +53,8 @@
                   tableName="skill"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="type" type="string"/>
-            <column name="under" type="string"/>
+            <column name="skill_type" type="string"/>
+            <column name="refrence_stat" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

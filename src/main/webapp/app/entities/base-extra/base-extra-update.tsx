@@ -86,7 +86,7 @@ export const BaseExtraUpdate = () => {
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="base-extra-id" label="ID" validate={{ required: true }} /> : null}
               <ValidatedField label="Name" id="base-extra-name" name="name" data-cy="name" type="text" />
-              <ValidatedField label="Value" id="base-extra-value" name="value" data-cy="value" type="text" />
+              <ValidatedField label="Cost" id="base-extra-cost" name="cost" data-cy="cost" type="text" />
               <ValidatedField id="base-extra-refrence" name="refrence" data-cy="refrence" label="Refrence" type="select">
                 <option value="" key="0" />
                 {refrences

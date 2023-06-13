@@ -123,11 +123,11 @@ public class SkillResource {
         Optional<Skill> result = skillRepository
             .findById(skill.getId())
             .map(existingSkill -> {
-                if (skill.getType() != null) {
-                    existingSkill.setType(skill.getType());
+                if (skill.getSkillType() != null) {
+                    existingSkill.setSkillType(skill.getSkillType());
                 }
-                if (skill.getUnder() != null) {
-                    existingSkill.setUnder(skill.getUnder());
+                if (skill.getRefrenceStat() != null) {
+                    existingSkill.setRefrenceStat(skill.getRefrenceStat());
                 }
 
                 return existingSkill;

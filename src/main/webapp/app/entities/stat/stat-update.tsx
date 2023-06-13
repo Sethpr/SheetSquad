@@ -82,7 +82,7 @@ export const StatUpdate = () => {
     isNew
       ? {}
       : {
-          type: 'BODY',
+          statType: 'BODY',
           ...statEntity,
           pool: statEntity?.pool?.id,
           extra: statEntity?.extra?.id,
@@ -106,7 +106,7 @@ export const StatUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="stat-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Type" id="stat-type" name="type" data-cy="type" type="select">
+              <ValidatedField label="Stat Type" id="stat-statType" name="statType" data-cy="statType" type="select">
                 {statTypeValues.map(statType => (
                   <option value={statType} key={statType}>
                     {statType}

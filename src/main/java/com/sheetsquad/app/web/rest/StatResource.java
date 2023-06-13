@@ -123,8 +123,8 @@ public class StatResource {
         Optional<Stat> result = statRepository
             .findById(stat.getId())
             .map(existingStat -> {
-                if (stat.getType() != null) {
-                    existingStat.setType(stat.getType());
+                if (stat.getStatType() != null) {
+                    existingStat.setStatType(stat.getStatType());
                 }
 
                 return existingStat;

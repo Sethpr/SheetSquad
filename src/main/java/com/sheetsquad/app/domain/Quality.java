@@ -28,8 +28,8 @@ public class Quality implements Serializable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private QualityType type;
+    @Column(name = "quality_type", nullable = false)
+    private QualityType qualityType;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -71,17 +71,17 @@ public class Quality implements Serializable {
         this.id = id;
     }
 
-    public QualityType getType() {
-        return this.type;
+    public QualityType getQualityType() {
+        return this.qualityType;
     }
 
-    public Quality type(QualityType type) {
-        this.setType(type);
+    public Quality qualityType(QualityType qualityType) {
+        this.setQualityType(qualityType);
         return this;
     }
 
-    public void setType(QualityType type) {
-        this.type = type;
+    public void setQualityType(QualityType qualityType) {
+        this.qualityType = qualityType;
     }
 
     public Capacity getCapacity1() {
@@ -186,7 +186,7 @@ public class Quality implements Serializable {
     public String toString() {
         return "Quality{" +
             "id=" + getId() +
-            ", type='" + getType() + "'" +
+            ", qualityType='" + getQualityType() + "'" +
             ", capacity1='" + getCapacity1() + "'" +
             ", capacity2='" + getCapacity2() + "'" +
             ", capacity3='" + getCapacity3() + "'" +

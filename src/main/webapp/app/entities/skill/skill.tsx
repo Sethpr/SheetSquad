@@ -47,8 +47,8 @@ export const Skill = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Type</th>
-                <th>Under</th>
+                <th>Skill Type</th>
+                <th>Refrence Stat</th>
                 <th>Pool</th>
                 <th>Extra</th>
                 <th>Owner</th>
@@ -64,8 +64,8 @@ export const Skill = () => {
                       {skill.id}
                     </Button>
                   </td>
-                  <td>{skill.type}</td>
-                  <td>{skill.under}</td>
+                  <td>{skill.skillType}</td>
+                  <td>{skill.refrenceStat}</td>
                   <td>{skill.pool ? <Link to={`/pool/${skill.pool.id}`}>{skill.pool.id}</Link> : ''}</td>
                   <td>{skill.extra ? <Link to={`/extra/${skill.extra.id}`}>{skill.extra.id}</Link> : ''}</td>
                   <td>{skill.owner ? <Link to={`/character/${skill.owner.id}`}>{skill.owner.name}</Link> : ''}</td>

@@ -14,7 +14,7 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="type" type="varchar(255)">
+            <column name="quality_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="capacity_1" type="varchar(255)">
@@ -56,7 +56,7 @@
                   tableName="quality"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="type" type="string"/>
+            <column name="quality_type" type="string"/>
             <column name="capacity_1" type="string"/>
             <column name="capacity_2" type="string"/>
             <column name="capacity_3" type="string"/>

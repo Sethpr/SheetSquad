@@ -39,8 +39,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class StatResourceIT {
 
-    private static final StatType DEFAULT_TYPE = StatType.BODY;
-    private static final StatType UPDATED_TYPE = StatType.COORDINATION;
+    private static final StatType DEFAULT_STAT_TYPE = StatType.BODY;
+    private static final StatType UPDATED_STAT_TYPE = StatType.COORDINATION;
 
     private static final String ENTITY_API_URL = "/api/stats";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -69,7 +69,7 @@ class StatResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Stat createEntity(EntityManager em) {
-        Stat stat = new Stat().type(DEFAULT_TYPE);
+        Stat stat = new Stat().statType(DEFAULT_STAT_TYPE);
         return stat;
     }
 
@@ -80,7 +80,7 @@ class StatResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Stat createUpdatedEntity(EntityManager em) {
-        Stat stat = new Stat().type(UPDATED_TYPE);
+        Stat stat = new Stat().statType(UPDATED_STAT_TYPE);
         return stat;
     }
 
@@ -102,7 +102,7 @@ class StatResourceIT {
         List<Stat> statList = statRepository.findAll();
         assertThat(statList).hasSize(databaseSizeBeforeCreate + 1);
         Stat testStat = statList.get(statList.size() - 1);
-        assertThat(testStat.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testStat.getStatType()).isEqualTo(DEFAULT_STAT_TYPE);
     }
 
     @Test
@@ -125,10 +125,10 @@ class StatResourceIT {
 
     @Test
     @Transactional
-    void checkTypeIsRequired() throws Exception {
+    void checkStatTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = statRepository.findAll().size();
         // set the field null
-        stat.setType(null);
+        stat.setStatType(null);
 
         // Create the Stat, which fails.
 
@@ -152,7 +152,7 @@ class StatResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stat.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].statType").value(hasItem(DEFAULT_STAT_TYPE.toString())));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -184,7 +184,7 @@ class StatResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(stat.getId().intValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
+            .andExpect(jsonPath("$.statType").value(DEFAULT_STAT_TYPE.toString()));
     }
 
     @Test
@@ -206,7 +206,7 @@ class StatResourceIT {
         Stat updatedStat = statRepository.findById(stat.getId()).get();
         // Disconnect from session so that the updates on updatedStat are not directly saved in db
         em.detach(updatedStat);
-        updatedStat.type(UPDATED_TYPE);
+        updatedStat.statType(UPDATED_STAT_TYPE);
 
         restStatMockMvc
             .perform(
@@ -220,7 +220,7 @@ class StatResourceIT {
         List<Stat> statList = statRepository.findAll();
         assertThat(statList).hasSize(databaseSizeBeforeUpdate);
         Stat testStat = statList.get(statList.size() - 1);
-        assertThat(testStat.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testStat.getStatType()).isEqualTo(UPDATED_STAT_TYPE);
     }
 
     @Test
@@ -303,7 +303,7 @@ class StatResourceIT {
         List<Stat> statList = statRepository.findAll();
         assertThat(statList).hasSize(databaseSizeBeforeUpdate);
         Stat testStat = statList.get(statList.size() - 1);
-        assertThat(testStat.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testStat.getStatType()).isEqualTo(DEFAULT_STAT_TYPE);
     }
 
     @Test
@@ -318,7 +318,7 @@ class StatResourceIT {
         Stat partialUpdatedStat = new Stat();
         partialUpdatedStat.setId(stat.getId());
 
-        partialUpdatedStat.type(UPDATED_TYPE);
+        partialUpdatedStat.statType(UPDATED_STAT_TYPE);
 
         restStatMockMvc
             .perform(
@@ -332,7 +332,7 @@ class StatResourceIT {
         List<Stat> statList = statRepository.findAll();
         assertThat(statList).hasSize(databaseSizeBeforeUpdate);
         Stat testStat = statList.get(statList.size() - 1);
-        assertThat(testStat.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testStat.getStatType()).isEqualTo(UPDATED_STAT_TYPE);
     }
 
     @Test

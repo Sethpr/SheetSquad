@@ -6,13 +6,13 @@
   "entityTableName": "skill",
   "fields": [
     {
-      "fieldName": "type",
+      "fieldName": "skillType",
       "fieldType": "SkillType",
       "fieldValidateRules": ["required"],
       "fieldValues": "ATHLETICS,BLOCK,BRAWILING,ENDURANCE,WEAPON,DODGE,DRIVE,LOCKPICKING,STEALTH,EMPATHY,PERCEPTION,SCRUTINY,FIRST_AID,KNOWLEGE,LANGUAGE,MEDICINE,NAVIGATION,RESEARCH,SECURITY_SYSTEMS,STREETWISE,SURVIVAL,TATICS,LIE,PERFORM,PERSUASION,INTERROGATION,INTIMIDATION,LEADERSHIP,STABILITY"
     },
     {
-      "fieldName": "under",
+      "fieldName": "refrenceStat",
       "fieldType": "StatType",
       "fieldValidateRules": ["required"],
       "fieldValues": "BODY,COORDINATION,SENSE,MIND,CHARM,COMMAND"

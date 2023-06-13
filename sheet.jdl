@@ -15,12 +15,12 @@ entity Archetype{
 }
 
 entity Stat{
-	type StatType required
+	statType StatType required
 }
 
 entity Skill{
-	type SkillType required
-    under StatType required
+	skillType SkillType required
+    refrenceStat StatType required
 }
 
 entity Pool{
@@ -43,7 +43,7 @@ entity Power {
 }
 
 entity Quality{
-	type QualityType required
+	qualityType QualityType required
     capacity1 Capacity required
     capacity2 Capacity
     capacity3 Capacity
@@ -58,7 +58,7 @@ entity Extra{
 
 entity BaseExtra {
 	name String
-    value Integer
+    cost Integer
 }
 
 entity Refrence {
@@ -143,9 +143,9 @@ relationship OneToOne {
 }
 
 relationship ManyToOne {
-	Quality{extra} to Extra
-    Stat{extra} to Extra
-    Skill{extra} to Extra
+	Extra{qualityOwner} to Quality
+    Extra{statOwner} to Stat
+    Extra{skillOwner} to Skill
 }
 
 relationship ManyToOne {

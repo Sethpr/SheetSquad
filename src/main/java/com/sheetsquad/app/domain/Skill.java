@@ -28,13 +28,13 @@ public class Skill implements Serializable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private SkillType type;
+    @Column(name = "skill_type", nullable = false)
+    private SkillType skillType;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "under", nullable = false)
-    private StatType under;
+    @Column(name = "refrence_stat", nullable = false)
+    private StatType refrenceStat;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -66,30 +66,30 @@ public class Skill implements Serializable {
         this.id = id;
     }
 
-    public SkillType getType() {
-        return this.type;
+    public SkillType getSkillType() {
+        return this.skillType;
     }
 
-    public Skill type(SkillType type) {
-        this.setType(type);
+    public Skill skillType(SkillType skillType) {
+        this.setSkillType(skillType);
         return this;
     }
 
-    public void setType(SkillType type) {
-        this.type = type;
+    public void setSkillType(SkillType skillType) {
+        this.skillType = skillType;
     }
 
-    public StatType getUnder() {
-        return this.under;
+    public StatType getRefrenceStat() {
+        return this.refrenceStat;
     }
 
-    public Skill under(StatType under) {
-        this.setUnder(under);
+    public Skill refrenceStat(StatType refrenceStat) {
+        this.setRefrenceStat(refrenceStat);
         return this;
     }
 
-    public void setUnder(StatType under) {
-        this.under = under;
+    public void setRefrenceStat(StatType refrenceStat) {
+        this.refrenceStat = refrenceStat;
     }
 
     public Pool getPool() {
@@ -168,8 +168,8 @@ public class Skill implements Serializable {
     public String toString() {
         return "Skill{" +
             "id=" + getId() +
-            ", type='" + getType() + "'" +
-            ", under='" + getUnder() + "'" +
+            ", skillType='" + getSkillType() + "'" +
+            ", refrenceStat='" + getRefrenceStat() + "'" +
             "}";
     }
 }

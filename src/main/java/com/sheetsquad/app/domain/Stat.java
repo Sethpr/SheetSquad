@@ -27,8 +27,8 @@ public class Stat implements Serializable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private StatType type;
+    @Column(name = "stat_type", nullable = false)
+    private StatType statType;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -60,17 +60,17 @@ public class Stat implements Serializable {
         this.id = id;
     }
 
-    public StatType getType() {
-        return this.type;
+    public StatType getStatType() {
+        return this.statType;
     }
 
-    public Stat type(StatType type) {
-        this.setType(type);
+    public Stat statType(StatType statType) {
+        this.setStatType(statType);
         return this;
     }
 
-    public void setType(StatType type) {
-        this.type = type;
+    public void setStatType(StatType statType) {
+        this.statType = statType;
     }
 
     public Pool getPool() {
@@ -149,7 +149,7 @@ public class Stat implements Serializable {
     public String toString() {
         return "Stat{" +
             "id=" + getId() +
-            ", type='" + getType() + "'" +
+            ", statType='" + getStatType() + "'" +
             "}";
     }
 }

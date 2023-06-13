@@ -47,7 +47,7 @@ export const Quality = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Type</th>
+                <th>Quality Type</th>
                 <th>Capacity 1</th>
                 <th>Capacity 2</th>
                 <th>Capacity 3</th>
@@ -65,7 +65,7 @@ export const Quality = () => {
                       {quality.id}
                     </Button>
                   </td>
-                  <td>{quality.type}</td>
+                  <td>{quality.qualityType}</td>
                   <td>{quality.capacity1}</td>
                   <td>{quality.capacity2}</td>
                   <td>{quality.capacity3}</td>

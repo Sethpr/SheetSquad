@@ -47,7 +47,7 @@ export const Stat = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Type</th>
+                <th>Stat Type</th>
                 <th>Pool</th>
                 <th>Extra</th>
                 <th>Owner</th>
@@ -63,7 +63,7 @@ export const Stat = () => {
                       {stat.id}
                     </Button>
                   </td>
-                  <td>{stat.type}</td>
+                  <td>{stat.statType}</td>
                   <td>{stat.pool ? <Link to={`/pool/${stat.pool.id}`}>{stat.pool.id}</Link> : ''}</td>
                   <td>{stat.extra ? <Link to={`/extra/${stat.extra.id}`}>{stat.extra.id}</Link> : ''}</td>
                   <td>{stat.owner ? <Link to={`/character/${stat.owner.id}`}>{stat.owner.name}</Link> : ''}</td>

@@ -125,8 +125,8 @@ public class QualityResource {
         Optional<Quality> result = qualityRepository
             .findById(quality.getId())
             .map(existingQuality -> {
-                if (quality.getType() != null) {
-                    existingQuality.setType(quality.getType());
+                if (quality.getQualityType() != null) {
+                    existingQuality.setQualityType(quality.getQualityType());
                 }
                 if (quality.getCapacity1() != null) {
                     existingQuality.setCapacity1(quality.getCapacity1());

@@ -40,11 +40,11 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class SkillResourceIT {
 
-    private static final SkillType DEFAULT_TYPE = SkillType.ATHLETICS;
-    private static final SkillType UPDATED_TYPE = SkillType.BLOCK;
+    private static final SkillType DEFAULT_SKILL_TYPE = SkillType.ATHLETICS;
+    private static final SkillType UPDATED_SKILL_TYPE = SkillType.BLOCK;
 
-    private static final StatType DEFAULT_UNDER = StatType.BODY;
-    private static final StatType UPDATED_UNDER = StatType.COORDINATION;
+    private static final StatType DEFAULT_REFRENCE_STAT = StatType.BODY;
+    private static final StatType UPDATED_REFRENCE_STAT = StatType.COORDINATION;
 
     private static final String ENTITY_API_URL = "/api/skills";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -73,7 +73,7 @@ class SkillResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Skill createEntity(EntityManager em) {
-        Skill skill = new Skill().type(DEFAULT_TYPE).under(DEFAULT_UNDER);
+        Skill skill = new Skill().skillType(DEFAULT_SKILL_TYPE).refrenceStat(DEFAULT_REFRENCE_STAT);
         return skill;
     }
 
@@ -84,7 +84,7 @@ class SkillResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Skill createUpdatedEntity(EntityManager em) {
-        Skill skill = new Skill().type(UPDATED_TYPE).under(UPDATED_UNDER);
+        Skill skill = new Skill().skillType(UPDATED_SKILL_TYPE).refrenceStat(UPDATED_REFRENCE_STAT);
         return skill;
     }
 
@@ -106,8 +106,8 @@ class SkillResourceIT {
         List<Skill> skillList = skillRepository.findAll();
         assertThat(skillList).hasSize(databaseSizeBeforeCreate + 1);
         Skill testSkill = skillList.get(skillList.size() - 1);
-        assertThat(testSkill.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testSkill.getUnder()).isEqualTo(DEFAULT_UNDER);
+        assertThat(testSkill.getSkillType()).isEqualTo(DEFAULT_SKILL_TYPE);
+        assertThat(testSkill.getRefrenceStat()).isEqualTo(DEFAULT_REFRENCE_STAT);
     }
 
     @Test
@@ -130,10 +130,10 @@ class SkillResourceIT {
 
     @Test
     @Transactional
-    void checkTypeIsRequired() throws Exception {
+    void checkSkillTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = skillRepository.findAll().size();
         // set the field null
-        skill.setType(null);
+        skill.setSkillType(null);
 
         // Create the Skill, which fails.
 
@@ -147,10 +147,10 @@ class SkillResourceIT {
 
     @Test
     @Transactional
-    void checkUnderIsRequired() throws Exception {
+    void checkRefrenceStatIsRequired() throws Exception {
         int databaseSizeBeforeTest = skillRepository.findAll().size();
         // set the field null
-        skill.setUnder(null);
+        skill.setRefrenceStat(null);
 
         // Create the Skill, which fails.
 
@@ -174,8 +174,8 @@ class SkillResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(skill.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].under").value(hasItem(DEFAULT_UNDER.toString())));
+            .andExpect(jsonPath("$.[*].skillType").value(hasItem(DEFAULT_SKILL_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].refrenceStat").value(hasItem(DEFAULT_REFRENCE_STAT.toString())));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -207,8 +207,8 @@ class SkillResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(skill.getId().intValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
-            .andExpect(jsonPath("$.under").value(DEFAULT_UNDER.toString()));
+            .andExpect(jsonPath("$.skillType").value(DEFAULT_SKILL_TYPE.toString()))
+            .andExpect(jsonPath("$.refrenceStat").value(DEFAULT_REFRENCE_STAT.toString()));
     }
 
     @Test
@@ -230,7 +230,7 @@ class SkillResourceIT {
         Skill updatedSkill = skillRepository.findById(skill.getId()).get();
         // Disconnect from session so that the updates on updatedSkill are not directly saved in db
         em.detach(updatedSkill);
-        updatedSkill.type(UPDATED_TYPE).under(UPDATED_UNDER);
+        updatedSkill.skillType(UPDATED_SKILL_TYPE).refrenceStat(UPDATED_REFRENCE_STAT);
 
         restSkillMockMvc
             .perform(
@@ -244,8 +244,8 @@ class SkillResourceIT {
         List<Skill> skillList = skillRepository.findAll();
         assertThat(skillList).hasSize(databaseSizeBeforeUpdate);
         Skill testSkill = skillList.get(skillList.size() - 1);
-        assertThat(testSkill.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testSkill.getUnder()).isEqualTo(UPDATED_UNDER);
+        assertThat(testSkill.getSkillType()).isEqualTo(UPDATED_SKILL_TYPE);
+        assertThat(testSkill.getRefrenceStat()).isEqualTo(UPDATED_REFRENCE_STAT);
     }
 
     @Test
@@ -316,7 +316,7 @@ class SkillResourceIT {
         Skill partialUpdatedSkill = new Skill();
         partialUpdatedSkill.setId(skill.getId());
 
-        partialUpdatedSkill.under(UPDATED_UNDER);
+        partialUpdatedSkill.refrenceStat(UPDATED_REFRENCE_STAT);
 
         restSkillMockMvc
             .perform(
@@ -330,8 +330,8 @@ class SkillResourceIT {
         List<Skill> skillList = skillRepository.findAll();
         assertThat(skillList).hasSize(databaseSizeBeforeUpdate);
         Skill testSkill = skillList.get(skillList.size() - 1);
-        assertThat(testSkill.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testSkill.getUnder()).isEqualTo(UPDATED_UNDER);
+        assertThat(testSkill.getSkillType()).isEqualTo(DEFAULT_SKILL_TYPE);
+        assertThat(testSkill.getRefrenceStat()).isEqualTo(UPDATED_REFRENCE_STAT);
     }
 
     @Test
@@ -346,7 +346,7 @@ class SkillResourceIT {
         Skill partialUpdatedSkill = new Skill();
         partialUpdatedSkill.setId(skill.getId());
 
-        partialUpdatedSkill.type(UPDATED_TYPE).under(UPDATED_UNDER);
+        partialUpdatedSkill.skillType(UPDATED_SKILL_TYPE).refrenceStat(UPDATED_REFRENCE_STAT);
 
         restSkillMockMvc
             .perform(
@@ -360,8 +360,8 @@ class SkillResourceIT {
         List<Skill> skillList = skillRepository.findAll();
         assertThat(skillList).hasSize(databaseSizeBeforeUpdate);
         Skill testSkill = skillList.get(skillList.size() - 1);
-        assertThat(testSkill.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testSkill.getUnder()).isEqualTo(UPDATED_UNDER);
+        assertThat(testSkill.getSkillType()).isEqualTo(UPDATED_SKILL_TYPE);
+        assertThat(testSkill.getRefrenceStat()).isEqualTo(UPDATED_REFRENCE_STAT);
     }
 
     @Test

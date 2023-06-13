@@ -84,8 +84,8 @@ export const SkillUpdate = () => {
     isNew
       ? {}
       : {
-          type: 'ATHLETICS',
-          under: 'BODY',
+          skillType: 'ATHLETICS',
+          refrenceStat: 'BODY',
           ...skillEntity,
           pool: skillEntity?.pool?.id,
           extra: skillEntity?.extra?.id,
@@ -109,14 +109,14 @@ export const SkillUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="skill-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Type" id="skill-type" name="type" data-cy="type" type="select">
+              <ValidatedField label="Skill Type" id="skill-skillType" name="skillType" data-cy="skillType" type="select">
                 {skillTypeValues.map(skillType => (
                   <option value={skillType} key={skillType}>
                     {skillType}
                   </option>
                 ))}
               </ValidatedField>
-              <ValidatedField label="Under" id="skill-under" name="under" data-cy="under" type="select">
+              <ValidatedField label="Refrence Stat" id="skill-refrenceStat" name="refrenceStat" data-cy="refrenceStat" type="select">
                 {statTypeValues.map(statType => (
                   <option value={statType} key={statType}>
                     {statType}

@@ -29,9 +29,9 @@ export const QualityDetail = () => {
           </dt>
           <dd>{qualityEntity.id}</dd>
           <dt>
-            <span id="type">Type</span>
+            <span id="qualityType">Quality Type</span>
           </dt>
-          <dd>{qualityEntity.type}</dd>
+          <dd>{qualityEntity.qualityType}</dd>
           <dt>
             <span id="capacity1">Capacity 1</span>
           </dt>

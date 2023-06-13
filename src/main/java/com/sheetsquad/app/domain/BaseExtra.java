@@ -25,8 +25,8 @@ public class BaseExtra implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "value")
-    private Integer value;
+    @Column(name = "cost")
+    private Integer cost;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -60,17 +60,17 @@ public class BaseExtra implements Serializable {
         this.name = name;
     }
 
-    public Integer getValue() {
-        return this.value;
+    public Integer getCost() {
+        return this.cost;
     }
 
-    public BaseExtra value(Integer value) {
-        this.setValue(value);
+    public BaseExtra cost(Integer cost) {
+        this.setCost(cost);
         return this;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
+    public void setCost(Integer cost) {
+        this.cost = cost;
     }
 
     public Refrence getRefrence() {
@@ -111,7 +111,7 @@ public class BaseExtra implements Serializable {
         return "BaseExtra{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", value=" + getValue() +
+            ", cost=" + getCost() +
             "}";
     }
 }

@@ -7,8 +7,8 @@ import { StatType } from 'app/shared/model/enumerations/stat-type.model';
 
 export interface ISkill {
   id?: number;
-  type?: SkillType;
-  under?: StatType;
+  skillType?: SkillType;
+  refrenceStat?: StatType;
   pool?: IPool | null;
   extra?: IExtra | null;
   owner?: ICharacter | null;

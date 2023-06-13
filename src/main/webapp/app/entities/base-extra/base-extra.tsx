@@ -48,7 +48,7 @@ export const BaseExtra = () => {
               <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Value</th>
+                <th>Cost</th>
                 <th>Refrence</th>
                 <th />
               </tr>
@@ -62,7 +62,7 @@ export const BaseExtra = () => {
                     </Button>
                   </td>
                   <td>{baseExtra.name}</td>
-                  <td>{baseExtra.value}</td>
+                  <td>{baseExtra.cost}</td>
                   <td>{baseExtra.refrence ? <Link to={`/refrence/${baseExtra.refrence.id}`}>{baseExtra.refrence.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
